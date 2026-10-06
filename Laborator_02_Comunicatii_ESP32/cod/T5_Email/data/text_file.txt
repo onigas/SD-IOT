@@ -1,0 +1,4 @@
+Laborator 2 - ESP32
+Grupa: G01
+Test atasament TXT
+Acestea sunt date demonstrative, nu masuratori.

@@ -1,0 +1,13 @@
+# Configurare privata a studentilor
+**/secrets.h
+.env
+.env.*
+!.env.example
+# Fisiere temporare
+.DS_Store
+Thumbs.db
+~$*
+*.tmp
+*.bin
+*.elf
+*.map
