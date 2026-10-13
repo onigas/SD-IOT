@@ -1,0 +1,6 @@
+Interfata Task 5 (HTML/CSS/JS) adaptata din proiectul Rui Santos & Sara Santos, Random Nerd Tutorials.
+https://randomnerdtutorials.com/esp32-mpu-6050-web-server/
+Notificarile de autor si permisiunea de reutilizare sunt pastrate in fisiere.
+three.js r107: licenta MIT inclusa in data/THREE-LICENSE.txt.
+Cele 8 figuri sunt extrase din PDF-ul corectat furnizat de autor (13.10.2026), inclusiv figurile 1 si 4 inlocuite; marcajele surselor sunt pastrate.
+Codurile .ino si lab_config.h sunt implementari didactice pentru acest laborator.
