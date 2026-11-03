@@ -8,6 +8,7 @@ Materiale de laborator pentru ESP32, Raspberry Pi și aplicații Internet of Thi
 | --- | --- | --- | --- |
 | **2** | Comunicații cu ESP32: Wi-Fi, HTTP, Bluetooth, WhatsApp și e-mail | [Laboratorul 2](Laborator_02_Comunicatii_ESP32/README.md) | [Proiecte Arduino](Laborator_02_Comunicatii_ESP32/cod/) |
 | **3** | Senzori și interfețe web cu ESP32: DHT11, PIR, MPU6050/GY-87 și vizualizare 3D | [Îndrumător online](Laborator_03_Senzori_ESP32/documentatie/Laborator_03.md) · [PDF](Laborator_03_Senzori_ESP32/documentatie/Laborator_03.pdf) | [Cele 5 proiecte Arduino](Laborator_03_Senzori_ESP32/cod/) |
+| **6** | ESP-NOW: comunicații directe între ESP32, comparație cu ESP-MESH și gateway Wi-Fi | [Introducere teoretică](Laborator_06_ESP_NOW/documentatie/Laborator_06.md) | [Experimentele planificate](Laborator_06_ESP_NOW/README.md) |
 
 ### Laboratorul 3 — Senzori și interfețe web cu ESP32
 
@@ -20,6 +21,12 @@ Exercițiile sunt organizate în cinci proiecte independente:
 5. [T5 — MPU6050: server web și vizualizare 3D](Laborator_03_Senzori_ESP32/cod/T5_MPU_Web/)
 
 **[Deschideți pagina completă a Laboratorului 3](Laborator_03_Senzori_ESP32/README.md)** pentru cerințe, conexiuni, instalarea bibliotecilor și utilizarea LittleFS.
+
+### Laboratorul 6 — ESP-NOW
+
+Introducerea prezintă protocolul ESP-NOW, diferențele față de ESP-MESH (studiat anterior), topologiile de comunicație și utilizarea senzorului GY-87. Cele patru experimente — Two-Way, One-to-Many, Many-to-One și gateway ESP-NOW + Wi-Fi Web Server — vor fi dezvoltate ulterior.
+
+**[Deschideți introducerea Laboratorului 6](Laborator_06_ESP_NOW/documentatie/Laborator_06.md)**.
 
 ## Utilizare
 
