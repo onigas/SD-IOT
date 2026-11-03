@@ -4,8 +4,6 @@
 
 > **Scop:** realizarea unei rețele locale de senzori distribuiți, în care mai multe plăci ESP32 schimbă date prin ESP-NOW, iar un nod gateway poate publica valorile prin Wi-Fi într-o interfață web.
 
-**Stadiul documentului:** introducerea teoretică. Cele patru experimente vor fi dezvoltate ulterior, în secțiuni și proiecte separate.
-
 ## Cuprins
 
 1. [Context și motivație](#1-context-și-motivație)
@@ -26,7 +24,7 @@
 
 Există însă aplicații în care *nodurile de senzori* trebuie să comunice direct între ele, fără să se asocieze la router: senzori distribuiți într-o clădire, comenzi locale pentru actuatoare, echipamente mobile sau instalații temporare.
 
-**ESP-NOW** rezolvă această problemă prin schimbul de mesaje direct între interfețele Wi-Fi ale dispozitivelor compatibile. Routerul nu este necesar pentru comunicația ESP-NOW dintre noduri. În acest laborator **avem totuși un router**, pe care îl vom utiliza în etapa finală pentru conectarea gateway-ului la rețeaua locală și afișarea datelor într-un browser.
+**ESP-NOW** rezolvă această problemă prin schimbul de mesaje direct între interfețele Wi-Fi ale dispozitivelor compatibile. Routerul nu este necesar pentru comunicația ESP-NOW dintre noduri. Routerul Wi-Fi disponibil în laborator va fi utilizat pentru conectarea gateway-ului la rețeaua locală și afișarea datelor într-un browser.
 
 **Legătura cu laboratorul anterior:** ESP-MESH urmărea interconectarea nodurilor și extinderea acoperirii prin *multi-hop*. ESP-NOW urmărește în primul rând schimbul de mesaje directe, cu configurare relativ simplă. Aceste tehnologii nu sunt sinonime.
 
@@ -53,7 +51,7 @@ Destinația este identificată printr-o **adresă MAC**, nu printr-o adresă IP.
 - **unicast** — către un dispozitiv cu o adresă MAC specificată; expeditorul înregistrează de regulă destinatarul ca *peer*;
 - **broadcast** — către adresa `FF:FF:FF:FF:FF:FF`, pentru recepție de către nodurile compatibile aflate pe același canal.
 
-Adresele MAC ale interfețelor STA și SoftAP pot fi diferite. În aplicațiile laboratorului vom preciza ce interfață folosește fiecare nod.
+Adresele MAC ale interfețelor STA și SoftAP pot fi diferite. La configurarea fiecărui nod, identificați interfața utilizată și adresa MAC corespunzătoare.
 
 ### 3.2. Canal radio comun
 
@@ -175,7 +173,7 @@ Toate grupele vor utiliza același format de date, astfel încât un receptor s�
 | `gx, gy, gz` | Viteze unghiulare, într-o unitate stabilită |
 | `pressure` | Presiune atmosferică, într-o unitate stabilită |
 
-Structura C/C++ exactă, verificarea lungimii și inițializarea senzorilor vor fi definite în codul experimentelor. Pentru măsurarea latenței între două dispozitive, valorile `millis()` nu sunt direct comparabile fără sincronizarea ceasurilor.
+În implementare, definiți explicit structura C/C++, verificați lungimea pachetului recepționat și inițializați corect senzorii. Pentru măsurarea latenței între două dispozitive, valorile `millis()` nu sunt direct comparabile fără sincronizarea ceasurilor.
 
 ## 8. Fiabilitate și limitări
 
@@ -196,8 +194,6 @@ Pentru un rezultat corect, valorile trebuie măsurate pe aceeași fereastră tem
 
 ## 9. Structura celor patru experimente
 
-> **Experimentele sunt planificate; pașii de implementare și codul vor fi adăugate ulterior.**
-
 | Experiment | Temă | Obiectiv principal |
 | --- | --- | --- |
 | **T1** | ESP-NOW One-to-One / Two-Way | Identificare MAC, inițializare ESP-NOW, schimb bidirecțional de mesaje și date GY-87 |
@@ -211,7 +207,7 @@ Pentru un rezultat corect, valorile trebuie măsurate pe aceeași fereastră tem
 
 **Echipamente:** plăci ESP32 cu radio Wi-Fi de 2,4 GHz, module GY-87, cabluri USB de date, calculatoare cu Arduino IDE 2.x; pentru T4, router Wi-Fi de 2,4 GHz și un laptop cu browser.
 
-**Mediu software:** platforma `esp32 by Espressif Systems` și bibliotecile pentru senzor. Exemplele online pot utiliza semnături vechi ale callback-urilor ESP-NOW; pentru **Arduino ESP32 Core 3.x** trebuie verificate și adaptate declarațiile de recepție și transmisie. Nu utilizați conversii forțate de tip pentru a ascunde incompatibilitățile. Verificarea exactă a versiunilor și dependențelor va însoți codul fiecărui experiment.
+**Mediu software:** platforma `esp32 by Espressif Systems` și bibliotecile pentru senzor. Exemplele online pot utiliza semnături vechi ale callback-urilor ESP-NOW; pentru **Arduino ESP32 Core 3.x** trebuie verificate și adaptate declarațiile de recepție și transmisie. Nu utilizați conversii forțate de tip pentru a ascunde incompatibilitățile. Notați versiunea Arduino ESP32 Core și a bibliotecilor utilizate la compilare.
 
 **Întrebări pentru discuție:**
 
@@ -239,4 +235,3 @@ Pentru un rezultat corect, valorile trebuie măsurate pe aceeași fereastră tem
 - [Random Nerd Tutorials — ESP-NOW Many-to-One](https://randomnerdtutorials.com/esp-now-many-to-one-esp32/)
 - [Random Nerd Tutorials — ESP-NOW + Wi-Fi Web Server](https://randomnerdtutorials.com/esp32-esp-now-wi-fi-web-server/)
 
-*Material didactic redactat ca introducere originală. Exemplele externe sunt indicate prin legături; codul și experimentele vor fi documentate separat.*
