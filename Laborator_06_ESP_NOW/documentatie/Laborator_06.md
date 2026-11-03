@@ -26,7 +26,11 @@ Există însă aplicații în care *nodurile de senzori* trebuie să comunice di
 
 **ESP-NOW** rezolvă această problemă prin schimbul de mesaje direct între interfețele Wi-Fi ale dispozitivelor compatibile. Routerul nu este necesar pentru comunicația ESP-NOW dintre noduri. Routerul Wi-Fi disponibil în laborator va fi utilizat pentru conectarea gateway-ului la rețeaua locală și afișarea datelor într-un browser.
 
-**Legătura cu laboratorul anterior:** ESP-MESH urmărea interconectarea nodurilor și extinderea acoperirii prin *multi-hop*. ESP-NOW urmărește în primul rând schimbul de mesaje directe, cu configurare relativ simplă. Aceste tehnologii nu sunt sinonime.
+![Figura 1: Comparație între comunicarea Wi-Fi convențională și ESP-NOW](../imagini/01_wifi_vs_espnow.svg)
+
+*Figura 1. Comparație între comunicarea Wi-Fi convențională și ESP-NOW.*
+
+**Legătura cu laboratorul anterior:** în laboratorul despre rețele mesh (cu `painlessMesh`) am urmărit comunicația *multi-hop*. ESP-NOW urmărește în primul rând schimbul de mesaje directe, fără rutare automată. Tehnologia ESP-MESH din ESP-IDF și biblioteca `painlessMesh` sunt implementări distincte de rețele mesh, cu obiective similare de interconectare a nodurilor.
 
 ## 2. Obiective de învățare
 
@@ -67,15 +71,11 @@ ESP-NOW v1.0 permite maximum **250 octeți** de date utile per mesaj; ESP-NOW v2
 
 ### 3.4. Un schimb tipic de date
 
-~~~text
-ESP32 A (senzor)                         ESP32 B (receptor)
-  citește GY-87                              așteaptă mesaje
-  construiește pachetul
-  group_id, sequence, ax, ay, az, ...
-              ── ESP-NOW (MAC, canal) ──►   validează lungimea
-                                             identifică grupa
-                                             afișează valorile
-~~~
+![Figura 2: Comunicație One-to-One și bidirecțională Two-Way](../imagini/02_one_to_one_two_way.svg)
+
+*Figura 2. Comunicație One-to-One și bidirecțională Two-Way.*
+
+Într-o transmisie unidirecțională, placa A este emițătorul, iar placa B receptorul. În **Two-Way**, fiecare placă primește și transmite mesaje.
 
 ## 4. Topologii de comunicație
 
@@ -87,6 +87,18 @@ ESP32 A (senzor)                         ESP32 B (receptor)
 | **Many-to-One** | A, B, C → R | Colectarea centralizată a măsurătorilor |
 | **Many-to-Many** | Mai multe perechi comunică direct | Schimb de date între grupele laboratorului |
 
+![Figura 3: Topologia One-to-Many](../imagini/03_one_to_many.svg)
+
+*Figura 3. Topologia One-to-Many.*
+
+![Figura 4: Topologia Many-to-One: colectarea datelor de la mai multe grupe](../imagini/04_many_to_one.svg)
+
+*Figura 4. Topologia Many-to-One: colectarea datelor de la mai multe grupe.*
+
+![Figura 5: Topologia Many-to-Many: legături directe între grupe](../imagini/05_many_to_many.svg)
+
+*Figura 5. Topologia Many-to-Many: legături directe între grupe.*
+
 **Distincție importantă:** existența mai multor conexiuni sau chiar a unei configurații many-to-many **nu transformă automat rețeaua într-un mesh**. ESP-NOW nu descoperă și nu rutează implicit pachete pe trasee multi-hop.
 
 ## 5. ESP-NOW versus ESP-MESH
@@ -95,23 +107,11 @@ ESP32 A (senzor)                         ESP32 B (receptor)
 
 ### 5.1. Diferența ilustrată
 
-~~~text
-ESP-NOW — comunicare directă
+![Figura 6: ESP-NOW direct versus ESP-MESH cu rutare multi-hop](../imagini/06_espnow_vs_espmesh.svg)
 
-  Nod A  ───────────────────►  Nod B
+*Figura 6. ESP-NOW direct versus ESP-MESH cu rutare multi-hop.*
 
-Dacă B este în afara razei radio directe a lui A,
-ESP-NOW nu stabilește automat o rută prin C.
-
-
-ESP-MESH — comunicație multi-hop
-
-  Nod A  ─────►  Nod C  ─────►  Nod B
-                 (intermediar)
-
-Într-o rețea mesh configurată, datele pot traversa
-mai multe legături; rețeaua poate reorganiza traseele.
-~~~
+În stânga, ESP-NOW nu stabilește automat o rută alternativă prin nodul C. În dreapta, într-o rețea mesh, C poate participa la redirecționarea datelor către B.
 
 ### 5.2. Comparație
 
@@ -133,14 +133,9 @@ mai multe legături; rețeaua poate reorganiza traseele.
 
 Un ESP32 poate îndeplini simultan rolurile de **receptor ESP-NOW** și **client Wi-Fi al routerului**, cu condiția configurării corecte a canalului și a interfețelor. Gateway-ul va primi măsurătorile de la grupe și le va publica unui browser din rețeaua locală.
 
-~~~mermaid
-flowchart LR
-    A["ESP32 Grupa 1<br/>GY-87"] -->|"ESP-NOW"| G["ESP32 Gateway"]
-    B["ESP32 Grupa 2<br/>GY-87"] -->|"ESP-NOW"| G
-    C["ESP32 Grupa 3<br/>GY-87"] -->|"ESP-NOW"| G
-    G -->|"Wi-Fi / IP"| R["Router 2,4 GHz"]
-    R -->|"HTTP + SSE"| L["Laptop<br/>Dashboard web"]
-~~~
+![Figura 7: Arhitectura unui gateway ESP-NOW conectat la router și la dashboard-ul web](../imagini/07_gateway_web_server.svg)
+
+*Figura 7. Arhitectura unui gateway ESP-NOW conectat la router și la dashboard-ul web.*
 
 Prin urmare, **routerul nu transportă pachetele ESP-NOW dintre senzori și gateway**. El este folosit pentru accesul la serverul web găzduit de gateway. Pagina poate afișa valori de la mai multe grupe, actualizate prin *Server-Sent Events (SSE)*.
 
@@ -159,6 +154,10 @@ Prin urmare, **routerul nu transportă pachetele ESP-NOW dintre senzori și gate
 GY-87 **nu furnizează umiditate**; structurile de date din tutoriale trebuie adaptate. Pentru început sunt suficiente accelerațiile `ax`, `ay`, `az`, eventual vitezele unghiulare și presiunea.
 
 Pentru placa ESP32 clasică, conexiunile I²C utilizate frecvent sunt **SDA = GPIO 21**, **SCL = GPIO 22**. Verificați alimentarea, nivelurile logice și revizia modulului înainte de conectare. Puteți reutiliza codul de achiziție GY-87 din [Laboratorul 3](../../Laborator_03_Senzori_ESP32/README.md).
+
+![Figura 8: Achiziția GY-87 și transmiterea datelor prin ESP-NOW](../imagini/08_gy87_flux_date.svg)
+
+*Figura 8. Achiziția GY-87 și transmiterea datelor prin ESP-NOW.*
 
 ### Formatul comun al mesajului
 
@@ -185,6 +184,10 @@ ESP-NOW simplifică transferul de mesaje, dar **nu oferă, în mod implicit, toa
 - **Numerotare:** `sequence` permite depistarea golurilor și a mesajelor duplicate.
 - **Securitate:** ESP-NOW permite criptarea traficului unicast pe bază de chei configurate; **broadcast-ul nu este criptat prin mecanismul standard de criptare ESP-NOW**. Evitați datele sensibile în mesaje neprotejate.
 - **Raza de acțiune:** depinde de antenă, obstacole, orientare și interferențe; nu presupuneți o distanță universal garantată.
+
+![Figura 9: Numere de secvență, pachete pierdute și confirmări de aplicație](../imagini/09_fiabilitate_espnow.svg)
+
+*Figura 9. Numere de secvență, pachete pierdute și confirmări de aplicație.*
 
 Un indicator util al recepției este *Packet Delivery Ratio* (PDR):
 
