@@ -173,7 +173,7 @@ plt.show()
 python plot_dht.py
 ~~~
 
-Dacă lucrați exclusiv prin SSH fără desktop grafic, salvați figura și vizualizați fișierul `/lab9/dht.png` pe PC.
+În sesiunea grafică Raspberry Pi, accesată prin **Raspberry Pi Connect** sau **VNC**, graficul se afișează direct la executarea `python plot_dht.py`. O copie a graficului se salvează automat în `~/lab9/dht.png`.
 
 ## 3. Experimentul 2 — GY-87: I²C și înregistrarea datelor
 
