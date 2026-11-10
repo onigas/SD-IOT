@@ -51,7 +51,7 @@ Laboratorul abordează protocolul ESP-NOW, diferențele față de ESP-MESH, topo
 
 | Laborator | Temă | Activități | Număr în îndrumătorul inițial |
 | --- | --- | --- | --- |
-| **L7** | Raspberry Pi 5 și camera | Configurare, captură foto și video, timelapse și streaming | 8 |
+| **L7** | [Raspberry Pi 5 și camera USB](Laborator_07_Raspberry_Pi_Camera/README.md) | Identificarea camerei, captură foto, timelapse cu cron și streaming video | 8 |
 | **L8** | Captură foto declanșată de un senzor PIR | Detectarea mișcării cu senzorul PIR și comanda camerei | 9 |
 | **L9** | Achiziția și înregistrarea datelor de la senzori | Măsurători cu DHT11/DHT22, BME280 și GY-87 | 11 |
 
