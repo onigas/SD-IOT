@@ -41,7 +41,7 @@ Păstrați parolele Wi-Fi, tokenurile și cheile API în configurația locală. 
 | Laborator | Temă | Activități |
 | --- | --- | --- |
 | **L7** | [Raspberry Pi 5 și camera USB](Laborator_07_Raspberry_Pi_Camera/README.md) | Identificarea camerei, captură foto, timelapse cu cron și streaming video |
-| **L8** | [PIR și camera USB](Laborator_07_Raspberry_Pi_Camera/PIR_si_camera_USB.md) | Testarea HC-SR501, fotografie la detecție și afișarea detecțiilor în browser |
+| **L8** | [PIR și camera USB](Laborator_08_PIR_Camera_USB/README.md) | Testarea HC-SR501, fotografie la detecție și afișarea detecțiilor în browser |
 | **L9** | Achiziția și înregistrarea datelor de la senzori | Măsurători cu DHT11/DHT22, BME280 și GY-87 |
 | **L10** | Prelucrarea imaginilor cu OpenCV | Achiziție de la o cameră USB, detectarea muchiilor și identificarea obiectelor după culoare |
 | **L11** | Detecție în flux video cu OpenCV | Detectarea mișcării prin comparație cu un cadru de referință, detectarea fețelor și afișarea rezultatelor în browser |
