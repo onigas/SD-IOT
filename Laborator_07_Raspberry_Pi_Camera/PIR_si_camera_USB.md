@@ -6,7 +6,7 @@
 
 ## 1. Montați senzorul HC-SR501
 
-Înainte de cablare, identificați pe modul bornele **VCC**, **OUT** și **GND** cu ajutorul ilustrațiilor din fișă. Pentru montajul folosit de programul de mai jos, conectați **OUT la GPIO4 (pinul fizic 7)**, conform tabelului. [Vedeți senzorul HC-SR501 și schema de conectare în Lucrarea 12 (PDF)](https://cti.ubm.ro/si/Lucrarea%2012%20-%20Senzorul%20PIR.pdf)
+Înainte de cablare, identificați pe modul bornele **VCC**, **OUT** și **GND** cu ajutorul ilustrațiilor din fișă. Pentru montajul folosit de programul de mai jos, conectați **OUT la GPIO4 (pinul fizic 7)**, conform tabelului. [Senzorul PIR HC-SR501 și Raspberry Pi — schema de conectare (PDF)](https://cti.ubm.ro/si/Lucrarea%2012%20-%20Senzorul%20PIR.pdf)
 
 Opriți serverul de streaming cu Ctrl+C și verificați că ați eliminat captura periodică din prima parte. Notați dispozitivul video și rezoluția deja testate. Opriți Raspberry Pi din meniul sistemului, așteptați oprirea și deconectați alimentarea USB-C înainte de cablare. Camera rămâne conectată prin USB.
 
@@ -158,7 +158,7 @@ Rulați `python3 ~/lab7/istoric.py` și lăsați terminalul deschis pe durata pr
 
 ## Materiale de referință
 
-- [Lucrarea 12 — Senzorul PIR HC-SR501 și Raspberry Pi](https://cti.ubm.ro/si/Lucrarea%2012%20-%20Senzorul%20PIR.pdf)
+- [Senzorul PIR HC-SR501 și Raspberry Pi](https://cti.ubm.ro/si/Lucrarea%2012%20-%20Senzorul%20PIR.pdf)
 - Fișa de laborator „RPi 5 – Camera – Detectare Mișcare (PIR)”, pentru integrarea GPIO4 cu o cameră USB și fswebcam.
 - [Detectarea mișcării în Python cu GPIO Zero — Random Nerd Tutorials](https://randomnerdtutorials.com/raspberry-pi-detect-motion-pir-python/)
 - [Captură foto la detecție — Random Nerd Tutorials](https://randomnerdtutorials.com/raspberry-pi-motion-detector-photo-capture/). Exemplul de referință folosește o cameră Raspberry Pi V2; montajul acestei lucrări utilizează camera USB din prima parte.
