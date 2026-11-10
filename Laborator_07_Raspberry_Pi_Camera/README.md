@@ -119,15 +119,58 @@ Fotografia cea mai recentă apare prima. Verificați ora din numele ei și repet
 
 ## 4. Streaming video de pe placă spre PC
 
-**Pe Raspberry Pi**, consultați lista formatelor de la secțiunea 2. Pentru o cameră care oferă `MJPG` la rezoluția aleasă, porniți serverul astfel, din același terminal în care ați definit `CAMERA`:
+**4.1. Verificarea instalării mjpg-streamer.** În terminalul Raspberry Pi executați:
 
 ```bash
+which mjpg_streamer
+```
+
+Dacă nu se afișează nimic sau comanda de streaming produce `bash: mjpg_streamer: command not found`, instalați programul din surse:
+
+```bash
+sudo apt update
+sudo apt install -y git cmake build-essential libjpeg-dev
+cd ~/lab7
+git clone https://github.com/jacksonliam/mjpg-streamer.git
+cd mjpg-streamer/mjpg-streamer-experimental
+make
+sudo make install
+```
+
+Dacă directorul `mjpg-streamer` există deja, omiteți clonarea și intrați în `~/lab7/mjpg-streamer/mjpg-streamer-experimental`.
+
+Verificați din nou:
+
+```bash
+which mjpg_streamer
+```
+
+Pe placa `silab01`, instalarea a fost confirmată prin rezultatul `/usr/local/bin/mjpg_streamer`.
+
+**4.2. Pornirea streamingului.** Consultați formatele disponibile de la secțiunea 2. Dacă ați deschis un terminal nou, reinițializați variabila `CAMERA` cu dispozitivul verificat:
+
+```bash
+CAMERA=/dev/video0
 mjpg_streamer -i "input_uvc.so -d $CAMERA -r 640x480" -o "output_http.so -p 8080"
 ```
 
-Dacă la rezoluția aleasă camera oferă doar `YUYV`, adăugați `-y` în opțiunile de intrare, imediat după `input_uvc.so`. Lăsați serverul pornit. Modulul de intrare citește cadrele camerei, iar modulul HTTP le transmite pe portul 8080.
+Înlocuiți `/dev/video0` dacă dispozitivul camerei are alt nume. Pentru o cameră care oferă `MJPG` la 640×480, comanda este potrivită. Dacă oferă doar `YUYV`, adăugați `-y` în opțiunile `input_uvc.so`. Lăsați terminalul cu serverul pornit.
 
-**Pe PC**, deschideți un browser și introduceți `http://ADRESA_IP:8080/?action=stream`. Înlocuiți `ADRESA_IP` cu adresa locală a plăcii. Mișcați obiectul și verificați dacă imaginea din browser urmărește mișcarea. La final apăsați **Ctrl+C** în terminalul în care rulează serverul.
+**4.3. Vizualizarea imaginii în browser.** Deschideți alt terminal pe Raspberry Pi și identificați adresa sa IP:
+
+```bash
+hostname -I
+```
+
+Pe PC-ul din aceeași rețea, deschideți Chrome sau Edge și accesați:
+
+```text
+http://ADRESA_IP:8080/?action=stream
+```
+
+Înlocuiți `ADRESA_IP` cu IP-ul real al plăcii. Mișcați obiectul din fața camerei și verificați imaginea în timp real. La final opriți streamingul cu **Ctrl+C** în terminalul serverului.
+
+**Notă:** Acest experiment utilizează o cameră web USB UVC și modulul `input_uvc.so`. Camerele CSI pentru Raspberry Pi 5 pot necesita o metodă diferită bazată pe `rpicam`/`libcamera`.
 
 ## Rezultate de prezentat
 
