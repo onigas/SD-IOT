@@ -1,6 +1,4 @@
-# Partea a doua — Detectarea mișcării cu PIR și captură foto pe Raspberry Pi 5
-
-[Partea întâi — Raspberry Pi 5 și camera USB](README.md)
+# Detectarea mișcării cu PIR și captură foto pe Raspberry Pi 5
 
 **Obiectiv.** Construiți un post care fotografiază scena când senzorul HC-SR501 detectează mișcare. La final, o echipă trebuie să poată demonstra două declanșări distincte, cu o singură fotografie pentru fiecare activare continuă.
 
