@@ -34,24 +34,6 @@ Deschideți fiecare proiect în Arduino IDE din directorul său.
 
 Păstrați parolele Wi-Fi, tokenurile și cheile API în configurația locală. Nu le publicați pe GitHub.
 
-### Laboratorul 3 — Senzori și interfețe web cu ESP32
-
-Exercițiile sunt organizate în cinci proiecte independente:
-
-1. [T1 — DHT11: măsurarea temperaturii și umidității](Laborator_03_Senzori_ESP32/cod/T1_DHT11/)
-2. [T2 — DHT11: afișarea măsurătorilor printr-un server web](Laborator_03_Senzori_ESP32/cod/T2_DHT_Web/)
-3. [T3 — Senzor PIR: detectarea mișcării](Laborator_03_Senzori_ESP32/cod/T3_PIR/)
-4. [T4 — GY-87 / MPU6050: măsurarea accelerației și rotației](Laborator_03_Senzori_ESP32/cod/T4_GY87/)
-5. [T5 — MPU6050: server web și vizualizare 3D](Laborator_03_Senzori_ESP32/cod/T5_MPU_Web/)
-
-**[Deschideți pagina completă a Laboratorului 3](Laborator_03_Senzori_ESP32/README.md)** pentru cerințe, conexiuni, instalarea bibliotecilor și utilizarea LittleFS.
-
-### Laboratorul 6 — ESP-NOW
-
-Laboratorul abordează protocolul ESP-NOW, diferențele față de ESP-MESH, topologiile de comunicație și transmiterea datelor de la senzorul GY-87. Aplicațiile includ comunicații Two-Way, One-to-Many, Many-to-One și un gateway ESP-NOW + Wi-Fi Web Server.
-
-**[Deschideți introducerea Laboratorului 6](Laborator_06_ESP_NOW/documentatie/Laborator_06.md)**.
-
 <a id="raspberry-pi"></a>
 
 ## Partea a II-a — Sisteme cu Raspberry Pi
