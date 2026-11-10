@@ -22,13 +22,7 @@ La finalul lucrării studenții vor putea să:
 - modul GY-87 cu MPU6050 și BMP180; cabluri, breadboard;
 - PC/telefon în aceeași rețea pentru vizualizarea 3D.
 
-~~~text
-DHT11/DHT22 -- GPIO4 ------------------+
-                                       |
-GY-87 -------- I²C (GPIO2 / GPIO3) ----+--> Raspberry Pi 5
-                                              |--> fișiere CSV
-                                              |--> HTTP/Flask --> browser: placă 3D
-~~~
+Conexiunile sunt ilustrate separat în secțiunile 2.1 și 3.2. Raspberry Pi înregistrează datele în fișiere CSV, iar aplicația Flask permite vizualizarea orientării GY-87 în browser.
 
 Senzorii pot fi testați succesiv; nu trebuie rulați simultan pentru a îndeplini cerințele. Ambele proiecte au propriul director de lucru, în ~/lab9.
 
@@ -66,6 +60,9 @@ ls /dev/i2c-1
 ## 2. Experimentul 1 — DHT11/DHT22: temperatură, umiditate, data logger
 
 ### 2.1. Conexiuni
+
+![Conectarea modulului DHT11/DHT22 la Raspberry Pi 5](imagini/conectare_dht_rpi5.svg)
+
 
 | DHT11/DHT22 | Raspberry Pi 5 |
 | --- | --- |
@@ -188,6 +185,9 @@ python plot_dht.py
 **GY-87 nu măsoară umiditatea.** Magnetometrul nu este utilizat în versiunea de bază a acestui laborator: unele plăci au clone sau acces prin magistrala auxiliară a MPU6050, iar implementarea necesită identificare și calibrare suplimentară.
 
 ### 3.2. Conexiuni
+
+![Conectarea magistralei I²C GY-87 la Raspberry Pi 5](imagini/conectare_gy87_rpi5.svg)
+
 
 | GY-87 | Raspberry Pi 5 |
 | --- | --- |
