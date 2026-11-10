@@ -20,6 +20,18 @@ Identificați bornele după inscripțiile modulului. Pentru acest HC-SR501 alime
 
 Realimentați placa, reconectați-vă la desktop și lăsați senzorul să se stabilizeze aproximativ un minut. Orientați lentila PIR și camera spre aceeași zonă de trecere.
 
+**Reglajele HC-SR501.** Identificați potențiometrul de sensibilitate, potențiometrul de temporizare și jumperul L/H după marcajele modulului. Sensibilitatea influențează distanța de declanșare. Temporizarea stabilește durata semnalului activ. În modul **H**, o nouă mișcare poate prelungi semnalul activ; în modul **L**, impulsul se încheie după timpul reglat. Notați poziția jumperului înainte de probe. Pentru a-l muta, opriți placa și deconectați alimentarea.
+
+**Verificarea postului.** În terminal, verificați că interpretul folosit pentru laborator poate importa bibliotecile și că utilitarul camerei este disponibil:
+
+```bash
+python3 -c "from gpiozero import MotionSensor; from flask import Flask; print('Biblioteci disponibile')"
+command -v fswebcam
+v4l2-ctl --list-devices
+```
+
+Ultima comandă trebuie să afișeze camera web. Dacă numărul dispozitivului s-a schimbat după repornire, folosiți noul număr în program. Înainte de testul integrat, repetați captura manuală din prima parte și deschideți fotografia.
+
 ## 2. Observați ce consideră senzorul un eveniment
 
 În directorul `~/lab7`, creați fișierul `pir_test.py` cu următorul conținut:
@@ -50,11 +62,14 @@ Creați `~/lab7/pir_foto.py`. Adaptați dispozitivul și rezoluția la valorile 
 from datetime import datetime
 from pathlib import Path
 from subprocess import CalledProcessError, run
+from time import monotonic
 
 from gpiozero import MotionSensor
 
 camera = "/dev/video0"
 rezolutie = "640x480"
+pauza_minima = 10  # secunde între începuturile a două capturi
+urmatoarea_captura = 0.0
 folder = Path.home() / "lab7" / "detectii"
 folder.mkdir(parents=True, exist_ok=True)
 
@@ -62,27 +77,35 @@ with MotionSensor(4) as pir:
     print("Aștept repausul inițial.", flush=True)
     pir.wait_for_no_motion()
     while True:
-        print("Sistem pregătit pentru o trecere.", flush=True)
+        print("Aștept următoarea activare.", flush=True)
         pir.wait_for_motion()
+        acum = monotonic()
+        if acum < urmatoarea_captura:
+            print("Activare în pauza de 10 s; aștept revenirea în repaus.", flush=True)
+            pir.wait_for_no_motion()
+            continue
+        urmatoarea_captura = acum + pauza_minima
         moment = datetime.now()
         cale = folder / moment.strftime("%Y-%m-%d_%H-%M-%S_%f.jpg")
+        temporar = cale.with_suffix(".part")
         print("Mișcare detectată la", moment.isoformat(timespec="seconds"), flush=True)
         try:
             run(["fswebcam", "-d", camera, "-r", rezolutie,
-                 "--no-banner", str(cale)], check=True)
+                 "--no-banner", "--jpeg", "90", str(temporar)], check=True)
+            temporar.replace(cale)
             print("Fotografie salvată:", cale.name, flush=True)
         except CalledProcessError as eroare:
-            cale.unlink(missing_ok=True)
+            temporar.unlink(missing_ok=True)
             print("Captură eșuată. Cod fswebcam:", eroare.returncode, flush=True)
         pir.wait_for_no_motion()
 ```
 
-Rulați `python3 ~/lab7/pir_foto.py`. În timpul fotografierii, programul așteaptă finalizarea comenzii `fswebcam`. După captură, se rearmează când ieșirea PIR revine în repaus.
+Rulați `python3 ~/lab7/pir_foto.py`. În timpul fotografierii, programul așteaptă finalizarea comenzii `fswebcam`. O nouă fotografie cere atât o nouă activare după revenirea în repaus, cât și minimum 10 secunde de la începutul capturii precedente. O trecere începută în pauză este ignorată.
 
 | Probă | Ce verificați |
 | --- | --- |
 | Scena în repaus | După stabilizare, notați câte fișiere sunt în folder. Urmăriți dacă numărul rămâne constant timp de 30 de secunde. |
-| Două treceri separate | La fiecare mesaj „Sistem pregătit”, treceți o dată prin zonă. Identificați cele două fișiere noi și verificați imaginile. |
+| Două treceri separate | Faceți câte o trecere după revenirea senzorului în repaus, lăsând peste 10 secunde între treceri. Identificați cele două fișiere noi și verificați imaginile. |
 | Mișcare continuă | Urmăriți numărul de fotografii cât timp OUT rămâne activ. Corelați rezultatul cu durata măsurată la testul PIR. |
 | Poziționare | Dacă senzorul declanșează, dar persoana a ieșit deja din cadru, ajustați orientarea camerei și a senzorului. Repetați aceeași trecere și comparați imaginile. |
 
@@ -98,6 +121,38 @@ Creați o pagină Flask care afișează ultimele cinci fotografii, de la cea mai
 2. Afișați pentru fiecare rezultat ora detecției și o legătură către imagine. Pentru ruta `/foto/<nume>`, folosiți `send_from_directory(folder, nume)`. Afișați un mesaj când directorul este gol.
 3. Porniți aplicația pe interfața rețelei de laborator, la portul 5000, cu modul debug dezactivat. Într-un al doilea terminal reporniți detectorul. De pe PC deschideți `http://ADRESA_IP:5000/`.
 4. Declanșați o captură, reîncărcați pagina și deschideți imaginea. Pentru a verifica limita de cinci, produceți șase evenimente și comparați lista din browser cu fișierele de pe placă. Opriți ambele programe cu Ctrl+C.
+
+**Program de referință.** Salvați ca `~/lab7/istoric.py`:
+
+```python
+from pathlib import Path
+from flask import Flask, render_template_string, send_from_directory
+
+app = Flask(__name__)
+folder = Path.home() / "lab7" / "detectii"
+
+@app.get("/")
+def istoric():
+    imagini = sorted(folder.glob("*.jpg"), reverse=True)[:5]
+    return render_template_string("""
+        <html lang="ro"><meta charset="utf-8"><title>Detecții PIR</title>
+        <h1>Ultimele detecții PIR</h1><ul>
+        {% for imagine in imagini %}
+          <li>{{ imagine.stem[:10] }} {{ imagine.stem[11:19].replace('-', ':') }}
+          <a href="{{ url_for('foto', nume=imagine.name) }}">Fotografie</a></li>
+        {% else %}<li>Încă nu există fotografii.</li>{% endfor %}
+        </ul></html>
+    """, imagini=imagini)
+
+@app.get("/foto/<nume>")
+def foto(nume):
+    return send_from_directory(folder, nume)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=False)
+```
+
+Rulați `python3 ~/lab7/istoric.py` și lăsați terminalul deschis pe durata probei. Detectorul afișează în terminal inclusiv erorile de captură; pagina web listează evenimentele pentru care fotografia a fost salvată.
 
 **De prezentat:** montajul și pinul folosit, o măsurătoare a duratei semnalului activ, două fotografii asociate unor treceri distincte și rezultatul probei de mișcare continuă. Demonstrați actualizarea istoricului din browser după o nouă detecție.
 
