@@ -140,7 +140,7 @@ Programul convertește fiecare cadru din BGR în HSV, construiește măști pent
 ## Experimentul 5 — Evaluarea performanței CPU în Jupyter (35–45 min)
 
 **Notebook:** [`pipeline CPU.ipynb`](notebook/pipeline%20CPU.ipynb) (din arhiva furnizată).  
-**Date experimentale originale:** `timing_rpi_sobel_pipeline.csv` și `timing_rpi_sobel_pipeline1.csv`, pentru comparație cu măsurătorile proprii.
+**Date experimentale originale:** `timing_rpi_sobel_pipeline.csv` și `timing_rpi_sobel_pipeline1.csv` din arhiva `RPi_OpenCV.zip`, pentru comparație cu măsurătorile proprii. **Fișierele CSV nu sunt încă publicate în acest director GitHub**; utilizați momentan copiile din arhiva originală.
 
 Notebook-ul parcurge explicit:
 
