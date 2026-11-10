@@ -6,7 +6,7 @@
 
 Înainte de cablare, identificați pe modul bornele **VCC**, **OUT** și **GND** cu ajutorul ilustrațiilor din fișă. Pentru montajul folosit de programul de mai jos, conectați **OUT la GPIO4 (pinul fizic 7)**, conform tabelului. [Senzorul PIR HC-SR501 și Raspberry Pi — schema de conectare (PDF)](https://cti.ubm.ro/si/Lucrarea%2012%20-%20Senzorul%20PIR.pdf)
 
-Opriți serverul de streaming cu Ctrl+C și verificați că ați eliminat captura periodică din prima parte. Notați dispozitivul video și rezoluția deja testate. Opriți Raspberry Pi din meniul sistemului, așteptați oprirea și deconectați alimentarea USB-C înainte de cablare. Camera rămâne conectată prin USB.
+Închideți eventualele programe care folosesc camera USB. Opriți Raspberry Pi din meniul sistemului, așteptați oprirea și deconectați alimentarea USB-C înainte de cablare. Conectați camera web la un port USB al plăcii.
 
 | Bornă HC-SR501 | Conexiune Raspberry Pi 5 | Pin fizic |
 | --- | --- | --- |
@@ -28,11 +28,20 @@ command -v fswebcam
 v4l2-ctl --list-devices
 ```
 
-Ultima comandă trebuie să afișeze camera web. Dacă numărul dispozitivului s-a schimbat după repornire, folosiți noul număr în program. Înainte de testul integrat, repetați captura manuală din prima parte și deschideți fotografia.
+Ultima comandă trebuie să afișeze camera web. Dacă numărul dispozitivului s-a schimbat după repornire, folosiți noul număr în program. Identificați dispozitivul de captură al camerei. Exemplul folosește `/dev/video0`. Verificați rezoluțiile disponibile, apoi faceți o fotografie de probă. Adaptați dispozitivul și rezoluția la camera postului.
+
+```bash
+mkdir -p ~/lab8
+cd ~/lab8
+v4l2-ctl -d /dev/video0 --list-formats-ext
+fswebcam -d /dev/video0 -r 640x480 proba.jpg
+```
+
+Deschideți `~/lab8/proba.jpg` și verificați încadrarea.
 
 ## 2. Observați ce consideră senzorul un eveniment
 
-În directorul `~/lab7`, creați fișierul `pir_test.py` cu următorul conținut:
+În directorul `~/lab8`, creați fișierul `pir_test.py` cu următorul conținut:
 
 ```python
 from datetime import datetime
@@ -48,13 +57,13 @@ with MotionSensor(4) as pir:
         print(datetime.now().isoformat(timespec="seconds"), "OUT în repaus", flush=True)
 ```
 
-Rulați `python3 ~/lab7/pir_test.py`. Treceți transversal prin fața senzorului, apoi ieșiți din zonă. Notați cele două ore afișate și calculați cât timp a rămas activ semnalul. Repetați testul cu două treceri apropiate. Câte activări distincte a înregistrat programul? Folosiți revenirea în repaus drept reper pentru următoarea trecere. Un senzor PIR răspunde la variația radiației infraroșii din câmpul său; o persoană care stă nemișcată poate rămâne în cadru după ce ieșirea a revenit în repaus.
+Rulați `python3 ~/lab8/pir_test.py`. Treceți transversal prin fața senzorului, apoi ieșiți din zonă. Notați cele două ore afișate și calculați cât timp a rămas activ semnalul. Repetați testul cu două treceri apropiate. Câte activări distincte a înregistrat programul? Folosiți revenirea în repaus drept reper pentru următoarea trecere. Un senzor PIR răspunde la variația radiației infraroșii din câmpul său; o persoană care stă nemișcată poate rămâne în cadru după ce ieșirea a revenit în repaus.
 
 Observați poziția inițială a reglajului de temporizare al modulului. Modificați ușor temporizarea, repetați aceeași trecere și comparați duratele. Restabiliți reglajul inițial. Opriți programul cu Ctrl+C înainte de a începe captura foto.
 
 ## 3. Declanșați camera la începutul fiecărei activări
 
-Creați `~/lab7/pir_foto.py`. Adaptați dispozitivul și rezoluția la valorile verificate în prima parte. Programul folosește ora detecției în numele fotografiei; astfel, la repornire, capturile anterioare se păstrează.
+Creați `~/lab8/pir_foto.py`. Adaptați dispozitivul și rezoluția la valorile folosite pentru fotografia de probă. Programul folosește ora detecției în numele fotografiei; astfel, la repornire, capturile anterioare se păstrează.
 
 ```python
 from datetime import datetime
@@ -68,7 +77,7 @@ camera = "/dev/video0"
 rezolutie = "640x480"
 pauza_minima = 10  # secunde între începuturile a două capturi
 urmatoarea_captura = 0.0
-folder = Path.home() / "lab7" / "detectii"
+folder = Path.home() / "lab8" / "detectii"
 folder.mkdir(parents=True, exist_ok=True)
 
 with MotionSensor(4) as pir:
@@ -98,7 +107,7 @@ with MotionSensor(4) as pir:
         pir.wait_for_no_motion()
 ```
 
-Rulați `python3 ~/lab7/pir_foto.py`. În timpul fotografierii, programul așteaptă finalizarea comenzii `fswebcam`. O nouă fotografie cere atât o nouă activare după revenirea în repaus, cât și minimum 10 secunde de la începutul capturii precedente. O trecere începută în pauză este ignorată.
+Rulați `python3 ~/lab8/pir_foto.py`. În timpul fotografierii, programul așteaptă finalizarea comenzii `fswebcam`. O nouă fotografie cere atât o nouă activare după revenirea în repaus, cât și minimum 10 secunde de la începutul capturii precedente. O trecere începută în pauză este ignorată.
 
 | Probă | Ce verificați |
 | --- | --- |
@@ -107,11 +116,11 @@ Rulați `python3 ~/lab7/pir_foto.py`. În timpul fotografierii, programul aștea
 | Mișcare continuă | Urmăriți numărul de fotografii cât timp OUT rămâne activ. Corelați rezultatul cu durata măsurată la testul PIR. |
 | Poziționare | Dacă senzorul declanșează, dar persoana a ieșit deja din cadru, ajustați orientarea camerei și a senzorului. Repetați aceeași trecere și comparați imaginile. |
 
-Pentru demonstrație, folosiți o zonă de trecere controlată de echipă. La final, opriți detectorul cu Ctrl+C. Dacă apar detecții fără imagini, testați separat comanda de captură din prima parte și verificați dacă alt program folosește camera.
+Pentru demonstrație, folosiți o zonă de trecere controlată de echipă. La final, opriți detectorul cu Ctrl+C. Dacă apar detecții fără imagini, testați separat comanda folosită pentru `proba.jpg` și verificați dacă alt program folosește camera.
 
 ## 4. Istoricul detecțiilor în browser
 
-Creați o pagină Flask care afișează ultimele cinci fotografii, de la cea mai recentă la cea mai veche. Directorul `~/lab7/detectii` este comun detectorului și paginii web. Detectorul gestionează camera; pagina citește fișierele. Numele fiecărui fișier conține data și ora evenimentului.
+Creați o pagină Flask care afișează ultimele cinci fotografii, de la cea mai recentă la cea mai veche. Directorul `~/lab8/detectii` este comun detectorului și paginii web. Detectorul gestionează camera; pagina citește fișierele. Numele fiecărui fișier conține data și ora evenimentului.
 
 **Pași de implementare**
 
@@ -120,14 +129,14 @@ Creați o pagină Flask care afișează ultimele cinci fotografii, de la cea mai
 3. Porniți aplicația pe interfața rețelei de laborator, la portul 5000, cu modul debug dezactivat. Într-un al doilea terminal reporniți detectorul. De pe PC deschideți `http://ADRESA_IP:5000/`.
 4. Declanșați o captură, reîncărcați pagina și deschideți imaginea. Pentru a verifica limita de cinci, produceți șase evenimente și comparați lista din browser cu fișierele de pe placă. Opriți ambele programe cu Ctrl+C.
 
-**Program de referință.** Salvați ca `~/lab7/istoric.py`:
+**Program de referință.** Salvați ca `~/lab8/istoric.py`:
 
 ```python
 from pathlib import Path
 from flask import Flask, render_template_string, send_from_directory
 
 app = Flask(__name__)
-folder = Path.home() / "lab7" / "detectii"
+folder = Path.home() / "lab8" / "detectii"
 
 @app.get("/")
 def istoric():
@@ -150,7 +159,7 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 ```
 
-Rulați `python3 ~/lab7/istoric.py` și lăsați terminalul deschis pe durata probei. Detectorul afișează în terminal inclusiv erorile de captură; pagina web listează evenimentele pentru care fotografia a fost salvată.
+Rulați `python3 ~/lab8/istoric.py` și lăsați terminalul deschis pe durata probei. Detectorul afișează în terminal inclusiv erorile de captură; pagina web listează evenimentele pentru care fotografia a fost salvată.
 
 **De prezentat:** montajul și pinul folosit, o măsurătoare a duratei semnalului activ, două fotografii asociate unor treceri distincte și rezultatul probei de mișcare continuă. Demonstrați actualizarea istoricului din browser după o nouă detecție.
 
@@ -159,4 +168,4 @@ Rulați `python3 ~/lab7/istoric.py` și lăsați terminalul deschis pe durata pr
 - [Senzorul PIR HC-SR501 și Raspberry Pi](https://cti.ubm.ro/si/Lucrarea%2012%20-%20Senzorul%20PIR.pdf)
 - Fișa de laborator „RPi 5 – Camera – Detectare Mișcare (PIR)”, pentru integrarea GPIO4 cu o cameră USB și fswebcam.
 - [Detectarea mișcării în Python cu GPIO Zero — Random Nerd Tutorials](https://randomnerdtutorials.com/raspberry-pi-detect-motion-pir-python/)
-- [Captură foto la detecție — Random Nerd Tutorials](https://randomnerdtutorials.com/raspberry-pi-motion-detector-photo-capture/). Exemplul de referință folosește o cameră Raspberry Pi V2; montajul acestei lucrări utilizează camera USB din prima parte.
+- [Captură foto la detecție — Random Nerd Tutorials](https://randomnerdtutorials.com/raspberry-pi-motion-detector-photo-capture/). Exemplul de referință folosește o cameră Raspberry Pi V2; montajul acestei lucrări utilizează o cameră USB.
