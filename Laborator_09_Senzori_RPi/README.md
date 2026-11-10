@@ -55,13 +55,13 @@ Verificați pachetele:
 python -c "import board, adafruit_dht, adafruit_mpu6050, bmp180, flask; print('Importuri OK')"
 ~~~
 
-Dacă interfața I²C nu este activă: ~~~sudo raspi-config~~~ → **Interface Options → I2C → Enable**, apoi reporniți placa. Verificați:
+Dacă interfața I²C nu este activă: `sudo raspi-config` → **Interface Options → I2C → Enable**, apoi reporniți placa. Verificați:
 
 ~~~bash
 ls /dev/i2c-1
 ~~~
 
-**Compatibilitate:** pe Raspberry Pi 5 și versiunile actuale Raspberry Pi OS, funcționarea DHT prin GPIO poate depinde de versiunea Blinka și de backend-ul GPIO. Dacă la test apar erori de backend sau sincronizare, notați versiunile cu ~~~python -m pip freeze~~~ și mesajul exact; nu presupuneți că un cod pentru modele Raspberry Pi mai vechi rulează identic.
+**Compatibilitate:** pe Raspberry Pi 5 și versiunile actuale Raspberry Pi OS, funcționarea DHT prin GPIO poate depinde de versiunea Blinka și de backend-ul GPIO. Dacă la test apar erori de backend sau sincronizare, notați versiunile cu `python -m pip freeze` și mesajul exact; nu presupuneți că un cod pentru modele Raspberry Pi mai vechi rulează identic.
 
 ## 2. Experimentul 1 — DHT11/DHT22: temperatură, umiditate, data logger
 
@@ -77,7 +77,7 @@ Confirmați ordinea bornelor inscripționată pe **modulul efectiv**, deoarece m
 
 ### 2.2. Programul de înregistrare
 
-Creați ~~~~/lab9/dht_logger.py~~~~:
+Creați `/lab9/dht_logger.py`:
 
 ~~~python
 import csv
@@ -138,7 +138,7 @@ tail -n 5 ~/lab9/dht.csv
 
 ### 2.3. Reprezentarea grafică a datelor
 
-Creați ~~~~/lab9/plot_dht.py~~~~:
+Creați `/lab9/plot_dht.py`:
 
 ~~~python
 import csv
@@ -173,7 +173,7 @@ plt.show()
 python plot_dht.py
 ~~~
 
-Dacă lucrați exclusiv prin SSH fără desktop grafic, salvați figura și vizualizați fișierul ~~~~/lab9/dht.png~~~~ pe PC.
+Dacă lucrați exclusiv prin SSH fără desktop grafic, salvați figura și vizualizați fișierul `/lab9/dht.png` pe PC.
 
 ## 3. Experimentul 2 — GY-87: I²C și înregistrarea datelor
 
@@ -208,7 +208,7 @@ Căutați în mod obișnuit **0x68** și **0x77**. Dacă una lipsește, verifica
 
 ### 3.3. Data logger GY-87
 
-Creați ~~~~/lab9/gy87_logger.py~~~~:
+Creați `/lab9/gy87_logger.py`:
 
 ~~~python
 import csv
@@ -259,16 +259,16 @@ except KeyboardInterrupt:
 python gy87_logger.py
 ~~~
 
-Înregistrați 15 secunde cu modulul nemișcat, apoi înclinați-l lent succesiv în jurul a două axe. Opriți cu **Ctrl+C**. Deschideți fișierul ~~~~/lab9/gy87.csv~~~~ și comparați valorile în repaus și în mișcare.
+Înregistrați 15 secunde cu modulul nemișcat, apoi înclinați-l lent succesiv în jurul a două axe. Opriți cu **Ctrl+C**. Deschideți fișierul `/lab9/gy87.csv` și comparați valorile în repaus și în mișcare.
 
 **Verificări:** în repaus, norma vectorului accelerației trebuie să fie aproximativ 9,81 m/s², în funcție de calibrare și orientare; viteza unghiulară ideală este aproape de zero. Temperatura MPU6050 este temperatura internă a circuitului, nu neapărat temperatura aerului.
 
 ### 3.4. Extindere: grafice pentru GY-87
 
 Folosind modelul de la secțiunea 2.3, reprezentați în funcție de timp:
-- cele trei accelerații ~~~ax_m_s2~~~, ~~~ay_m_s2~~~, ~~~az_m_s2~~~;
-- vitezele unghiulare ~~~gx_rad_s~~~, ~~~gy_rad_s~~~, ~~~gz_rad_s~~~;
-- presiunea ~~~presiune_hPa~~~.
+- cele trei accelerații `ax_m_s2`, `ay_m_s2`, `az_m_s2`;
+- vitezele unghiulare `gx_rad_s`, `gy_rad_s`, `gz_rad_s`;
+- presiunea `presiune_hPa`.
 
 Explicați diferența dintre o schimbare a **orientării statice** și o **rotație în curs**.
 
@@ -287,7 +287,7 @@ Unghiurile sunt raportate la axele senzorului. În cazul accelerațiilor dinamic
 
 ### 4.1. Serverul pentru vizualizare
 
-Creați ~~~~/lab9/gy87_3d.py~~~~:
+Creați `/lab9/gy87_3d.py`:
 
 ~~~python
 import math
@@ -416,7 +416,7 @@ Pe PC deschideți:
 http://ADRESA_IP:5000/
 ~~~
 
-Înlocuiți ~~~ADRESA_IP~~~ cu adresa plăcii. Înclinați lent GY-87 în jurul axelor X și Y, comparând modelul virtual cu mișcarea modulului fizic. Dacă un sens apare inversat, investigați orientarea convenției de axe și semnele unghiurilor; sensurile depind de poziționarea plăcii și de transformarea vizuală.
+Înlocuiți `ADRESA_IP` cu adresa plăcii. Înclinați lent GY-87 în jurul axelor X și Y, comparând modelul virtual cu mișcarea modulului fizic. Dacă un sens apare inversat, investigați orientarea convenției de axe și semnele unghiurilor; sensurile depind de poziționarea plăcii și de transformarea vizuală.
 
 ### 4.2. Probe și limitări
 
@@ -428,8 +428,8 @@ http://ADRESA_IP:5000/
 
 ## 5. Rezultate de prezentat
 
-- fișierul ~~~dht.csv~~~ și graficul ~~~dht.png~~~;
-- rezultatul scanării I²C, plus fișierul ~~~gy87.csv~~~ cu măsurători din repaus și din mișcare;
+- fișierul `dht.csv` și graficul `dht.png`;
+- rezultatul scanării I²C, plus fișierul `gy87.csv` cu măsurători din repaus și din mișcare;
 - demonstrarea plăcii 3D live într-un browser de pe alt dispozitiv;
 - răspuns scurt: ce măsoară DHT11/DHT22, ce oferă GY-87, ce înseamnă roll/pitch/yaw și de ce yaw nu poate fi determinat direct numai din accelerație.
 
