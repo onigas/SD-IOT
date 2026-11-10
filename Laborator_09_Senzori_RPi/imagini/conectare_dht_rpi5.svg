@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="590" viewBox="0 0 1120 590">
+<style>
+.t{font-family:Arial,Helvetica,sans-serif;fill:#152638}.h{font-size:27px;font-weight:700}.s{font-size:17px;font-weight:600}.sm{font-size:15px}.tiny{font-size:13px}.board{fill:#ecf4ee;stroke:#236347;stroke-width:3}.module{fill:#e9f0fa;stroke:#24578c;stroke-width:3}.pin{fill:white;stroke:#526579;stroke-width:2}.wire{stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}.red{stroke:#d13a39}.green{stroke:#238252}.blue{stroke:#2674c8}.gray{stroke:#5e6674}.dash{stroke:#ce8d24;stroke-width:4;stroke-dasharray:8 8}.box{fill:#fff;stroke:#d4e0e9;stroke-width:1.5}</style>
+<rect width="1120" height="590" fill="#fff"/><text class="t h" x="48" y="58">Raspberry Pi 5 ↔ DHT11 / DHT22</text><text class="t sm" x="48" y="88">Montaj GPIO — exemplu cu modul DHT alimentat la 3,3 V</text>
+<rect class="board" x="50" y="140" width="420" height="330" rx="20"/><text class="t h" x="85" y="195">Raspberry Pi 5</text><text class="t sm" x="85" y="226">Header GPIO 40 pini</text>
+<rect class="module" x="780" y="140" width="290" height="330" rx="20"/><text class="t h" x="830" y="196">DHT11 / DHT22</text><text class="t sm" x="830" y="226">Modul cu 3 pini</text>
+<path class="wire red" d="M430 280 H820"/><path class="wire green" d="M430 345 H820"/><path class="wire gray" d="M430 410 H820"/>
+<circle class="pin" cx="430" cy="280" r="11"/><circle class="pin" cx="820" cy="280" r="11"/><circle class="pin" cx="430" cy="345" r="11"/><circle class="pin" cx="820" cy="345" r="11"/><circle class="pin" cx="430" cy="410" r="11"/><circle class="pin" cx="820" cy="410" r="11"/>
+<text class="t s" x="80" y="286">3,3 V — pin fizic 1</text><text class="t s" x="80" y="351">GPIO4 — pin fizic 7</text><text class="t s" x="80" y="416">GND — pin fizic 6</text>
+<text class="t s" x="850" y="286">VCC</text><text class="t s" x="850" y="351">DATA</text><text class="t s" x="850" y="416">GND</text>
+<rect class="box" x="50" y="500" width="1020" height="65" rx="12"/><text class="t sm" x="70" y="525">Pull-up DATA → 3,3 V: 4,7–10 kΩ, numai dacă modulul nu îl are integrat.</text><text class="t sm" x="70" y="549">Verificați ordinea pinilor de pe senzorul real; nu toate modulele au același pinout.</text>
+</svg>
