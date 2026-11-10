@@ -112,5 +112,3 @@ Dacă la rezoluția aleasă camera oferă doar `YUYV`, adăugați `-y` în opți
 - [Captură foto cu fswebcam](https://manpages.debian.org/trixie/fswebcam/fswebcam.1.en.html) și [identificarea dispozitivelor cu v4l2-ctl](https://manpages.debian.org/trixie/v4l-utils/v4l2-ctl.1.en.html)
 - [Programarea sarcinilor cu cron](https://manpages.debian.org/trixie/cron/crontab.5.en.html)
 - [mjpg-streamer — accesarea fluxului HTTP](https://github.com/jacksonliam/mjpg-streamer/blob/master/mjpg-streamer-experimental/plugins/output_http/README.md)
-
-[Continuați cu partea a doua — Senzorul PIR și captura foto cu camera USB](PIR_si_camera_USB.md)
