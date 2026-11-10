@@ -66,7 +66,26 @@ Laboratorul abordează protocolul ESP-NOW, diferențele față de ESP-MESH, topo
 
 ## Partea a III-a — Proiect de sistem dedicat pentru IoT
 
-- Teme de proiect pentru ESP32, Raspberry Pi sau platforme similare.
+### Teme de proiect propuse
+
+**Lista temelor este în curs de actualizare.**
+
+| Nr. | Temă | Material de pornire |
+| --- | --- | --- |
+| 1 | Aplicații TinyML pe ESP32 | [Introducere în TinyML pe ESP32](https://www.teachmemicro.com/tinyml-with-esp32-tutorial/) |
+| 2 | Detectarea anomaliilor cu TinyML pe Raspberry Pi și ESP32 | [Colectarea datelor](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-1-data-collection/7bb112f76ef644edaedc5e08dba5faae) · [Antrenarea modelului](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-2-feature-extraction-and-model-training/70927a6e439b49bea7305953a3c9bfff) · [Raspberry Pi](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-3-machine-learning-on-raspberry-pi/af9dd958b23d4ea1b40bc3cc060ef8c9) · [ESP32](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-4-machine-learning-on-esp32-via-arduino/afacfc3dbaf24c6c94a55c4afae1afb2) |
+| 3 | Senzori, server web și MQTT cu MicroPython pe ESP32 | [Introducere](https://randomnerdtutorials.com/getting-started-micropython-esp32-esp8266/) · [DHT](https://randomnerdtutorials.com/micropython-esp32-esp8266-dht11-dht22-web-server/) · [BME280](https://randomnerdtutorials.com/micropython-bme280-esp32-esp8266/) · [MQTT](https://randomnerdtutorials.com/micropython-mqtt-publish-dht11-dht22-esp32-esp8266/) · [HC-SR04](https://randomnerdtutorials.com/micropython-hc-sr04-ultrasonic-esp32-esp8266/) |
+| 4 | Detectarea obiectelor cu ESP32-CAM și Edge Impulse | [Tutorial ESP32-CAM și Edge Impulse](https://dronebotworkshop.com/esp32-object-detect/) |
+| 5 | Streaming video și recunoaștere facială cu ESP32-CAM | [Exemplu pentru Arduino IDE](https://randomnerdtutorials.com/esp32-cam-video-streaming-face-recognition-arduino-ide/) |
+| 6 | Detectarea obiectelor în imagini de la ESP32-CAM cu OpenCV și YOLOv3 | [Exemplu în Python](https://diyprojectslabs.com/esp32-cam-object-detection-using-opencv-python/) |
+| 7 | Integrarea serviciilor OpenAI într-o aplicație Arduino pentru ESP32 | [Biblioteca OpenAI-ESP32](https://github.com/me-no-dev/OpenAI-ESP32) |
+| 8 | Achiziție de imagini cu o cameră USB și OpenCV pe Raspberry Pi | [Configurarea camerei USB](https://randomnerdtutorials.com/set-up-usb-camera-opencv-raspberry-pi/) |
+| 9 | Recunoașterea numerelor de înmatriculare | [Exemplu cu Raspberry Pi și Node-RED](https://randomnerdtutorials.com/car-plate-recognition-system-with-raspberry-pi-and-node-red/) |
+| 10 | Clasificarea imaginilor și detectarea obiectelor pe Raspberry Pi | [Fișă de laborator (PDF)](https://irh.inf.unideb.hu/~sutoj/subjects/embedded/slides/lab/lab10.pdf) |
+| 11 | Detectarea și recunoașterea textului în imagini | [Fișă de laborator (PDF)](https://irh.inf.unideb.hu/~sutoj/subjects/embedded/slides/lab/lab11.pdf) |
+
+### Realizarea proiectului
+
 - Cerințe de realizare și documentare a sistemului.
 - Demonstrarea și prezentarea proiectului.
 
