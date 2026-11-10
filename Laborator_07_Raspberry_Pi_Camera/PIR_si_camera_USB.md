@@ -4,9 +4,9 @@
 
 **Obiectiv.** Construiți un post care fotografiază scena când senzorul HC-SR501 detectează mișcare. La final, o echipă trebuie să poată demonstra două declanșări distincte, cu o singură fotografie pentru fiecare activare continuă.
 
-**Durată orientativă pentru ambele părți: 3–4 ore.** Rezervați aproximativ o oră pentru camera USB din prima parte și două ore pentru montaj, testarea senzorului și integrare. Pentru varianta de patru ore, adăugați istoricul web și demonstrația între echipe.
-
 ## 1. Montați senzorul HC-SR501
+
+Înainte de cablare, identificați pe modul bornele **VCC**, **OUT** și **GND** cu ajutorul ilustrațiilor din fișă. Pentru montajul folosit de programul de mai jos, conectați **OUT la GPIO4 (pinul fizic 7)**, conform tabelului. [Vedeți senzorul HC-SR501 și schema de conectare în Lucrarea 12 (PDF)](https://cti.ubm.ro/si/Lucrarea%2012%20-%20Senzorul%20PIR.pdf)
 
 Opriți serverul de streaming cu Ctrl+C și verificați că ați eliminat captura periodică din prima parte. Notați dispozitivul video și rezoluția deja testate. Opriți Raspberry Pi din meniul sistemului, așteptați oprirea și deconectați alimentarea USB-C înainte de cablare. Camera rămâne conectată prin USB.
 
@@ -88,7 +88,7 @@ Rulați `python3 ~/lab7/pir_foto.py`. În timpul fotografierii, programul aștea
 
 Pentru demonstrație, folosiți o zonă de trecere controlată de echipă. La final, opriți detectorul cu Ctrl+C. Dacă apar detecții fără imagini, testați separat comanda de captură din prima parte și verificați dacă alt program folosește camera.
 
-## 4. Extensie pentru a patra oră — istoricul detecțiilor în browser
+## 4. Istoricul detecțiilor în browser
 
 Creați o pagină Flask care afișează ultimele cinci fotografii, de la cea mai recentă la cea mai veche. Directorul `~/lab7/detectii` este comun detectorului și paginii web. Detectorul gestionează camera; pagina citește fișierele. Numele fiecărui fișier conține data și ora evenimentului.
 
@@ -99,7 +99,7 @@ Creați o pagină Flask care afișează ultimele cinci fotografii, de la cea mai
 3. Porniți aplicația pe interfața rețelei de laborator, la portul 5000, cu modul debug dezactivat. Într-un al doilea terminal reporniți detectorul. De pe PC deschideți `http://ADRESA_IP:5000/`.
 4. Declanșați o captură, reîncărcați pagina și deschideți imaginea. Pentru a verifica limita de cinci, produceți șase evenimente și comparați lista din browser cu fișierele de pe placă. Opriți ambele programe cu Ctrl+C.
 
-**De prezentat:** montajul și pinul folosit, o măsurătoare a duratei semnalului activ, două fotografii asociate unor treceri distincte și rezultatul probei de mișcare continuă. La varianta de patru ore, demonstrați și actualizarea istoricului din browser.
+**De prezentat:** montajul și pinul folosit, o măsurătoare a duratei semnalului activ, două fotografii asociate unor treceri distincte și rezultatul probei de mișcare continuă. Demonstrați actualizarea istoricului din browser după o nouă detecție.
 
 ## Materiale de referință
 
