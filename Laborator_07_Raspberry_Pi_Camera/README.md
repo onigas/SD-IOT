@@ -38,6 +38,13 @@ v4l2-ctl -d "$CAMERA" --list-formats-ext
 
 Notați o combinație disponibilă de format și rezoluție. Comenzile de mai jos folosesc `640x480`. Dacă această rezoluție lipsește, folosiți una din listă.
 
+**Verificați dacă `fswebcam` este instalat.** În terminalul de pe Raspberry Pi, rulați `command -v fswebcam`. Dacă nu se afișează nicio cale sau dacă la captură apare mesajul `fswebcam: command not found`, instalați utilitarul cu următoarele comenzi:
+
+```bash
+sudo apt update
+sudo apt install fswebcam
+```
+
 **Faceți o fotografie.** Îndreptați camera spre un obiect și rulați:
 
 ```bash
