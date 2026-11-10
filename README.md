@@ -49,11 +49,11 @@ Laboratorul abordează protocolul ESP-NOW, diferențele față de ESP-MESH, topo
 
 ### Lucrări din îndrumătorul Raspberry Pi
 
-| Laborator | Temă | Activități | Număr în îndrumătorul inițial |
-| --- | --- | --- | --- |
-| **L7** | [Raspberry Pi 5 și camera USB](Laborator_07_Raspberry_Pi_Camera/README.md) | Identificarea camerei, captură foto, timelapse cu cron și streaming video | 8 |
-| **L8** | [PIR și camera USB](Laborator_07_Raspberry_Pi_Camera/PIR_si_camera_USB.md) | Testarea HC-SR501, fotografie la detecție și afișarea detecțiilor în browser | 9 |
-| **L9** | Achiziția și înregistrarea datelor de la senzori | Măsurători cu DHT11/DHT22, BME280 și GY-87 | 11 |
+| Laborator | Temă | Activități |
+| --- | --- | --- |
+| **L7** | [Raspberry Pi 5 și camera USB](Laborator_07_Raspberry_Pi_Camera/README.md) | Identificarea camerei, captură foto, timelapse cu cron și streaming video |
+| **L8** | [PIR și camera USB](Laborator_07_Raspberry_Pi_Camera/PIR_si_camera_USB.md) | Testarea HC-SR501, fotografie la detecție și afișarea detecțiilor în browser |
+| **L9** | Achiziția și înregistrarea datelor de la senzori | Măsurători cu DHT11/DHT22, BME280 și GY-87 |
 
 ### Lucrări OpenCV
 
@@ -70,19 +70,36 @@ Laboratorul abordează protocolul ESP-NOW, diferențele față de ESP-MESH, topo
 
 **Lista temelor este în curs de actualizare.**
 
-| Nr. | Temă | Material de pornire |
-| --- | --- | --- |
-| 1 | Aplicații TinyML pe ESP32 | [Introducere în TinyML pe ESP32](https://www.teachmemicro.com/tinyml-with-esp32-tutorial/) |
-| 2 | Detectarea anomaliilor cu TinyML pe Raspberry Pi și ESP32 | [Colectarea datelor](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-1-data-collection/7bb112f76ef644edaedc5e08dba5faae) · [Antrenarea modelului](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-2-feature-extraction-and-model-training/70927a6e439b49bea7305953a3c9bfff) · [Raspberry Pi](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-3-machine-learning-on-raspberry-pi/af9dd958b23d4ea1b40bc3cc060ef8c9) · [ESP32](https://www.digikey.cz/en/maker/projects/edge-ai-anomaly-detection-part-4-machine-learning-on-esp32-via-arduino/afacfc3dbaf24c6c94a55c4afae1afb2) |
-| 3 | Senzori, server web și MQTT cu MicroPython pe ESP32 | [Introducere](https://randomnerdtutorials.com/getting-started-micropython-esp32-esp8266/) · [DHT](https://randomnerdtutorials.com/micropython-esp32-esp8266-dht11-dht22-web-server/) · [BME280](https://randomnerdtutorials.com/micropython-bme280-esp32-esp8266/) · [MQTT](https://randomnerdtutorials.com/micropython-mqtt-publish-dht11-dht22-esp32-esp8266/) · [HC-SR04](https://randomnerdtutorials.com/micropython-hc-sr04-ultrasonic-esp32-esp8266/) |
-| 4 | Detectarea obiectelor cu ESP32-CAM și Edge Impulse | [Tutorial ESP32-CAM și Edge Impulse](https://dronebotworkshop.com/esp32-object-detect/) |
-| 5 | Streaming video și recunoaștere facială cu ESP32-CAM | [Exemplu pentru Arduino IDE](https://randomnerdtutorials.com/esp32-cam-video-streaming-face-recognition-arduino-ide/) |
-| 6 | Detectarea obiectelor în imagini de la ESP32-CAM cu OpenCV și YOLOv3 | [Exemplu în Python](https://diyprojectslabs.com/esp32-cam-object-detection-using-opencv-python/) |
-| 7 | Integrarea serviciilor OpenAI într-o aplicație Arduino pentru ESP32 | [Biblioteca OpenAI-ESP32](https://github.com/me-no-dev/OpenAI-ESP32) |
-| 8 | Achiziție de imagini cu o cameră USB și OpenCV pe Raspberry Pi | [Configurarea camerei USB](https://randomnerdtutorials.com/set-up-usb-camera-opencv-raspberry-pi/) |
-| 9 | Recunoașterea numerelor de înmatriculare | [Exemplu cu Raspberry Pi și Node-RED](https://randomnerdtutorials.com/car-plate-recognition-system-with-raspberry-pi-and-node-red/) |
-| 10 | Clasificarea imaginilor și detectarea obiectelor pe Raspberry Pi | [Fișă de laborator (PDF)](https://irh.inf.unideb.hu/~sutoj/subjects/embedded/slides/lab/lab10.pdf) |
-| 11 | Detectarea și recunoașterea textului în imagini | [Fișă de laborator (PDF)](https://irh.inf.unideb.hu/~sutoj/subjects/embedded/slides/lab/lab11.pdf) |
+#### A. TinyML și inteligență artificială pentru IoT
+
+| Nr. | Tema de proiect | Echipament principal | Demonstrație finală |
+| --- | --- | --- | --- |
+| 1 | **Recunoașterea gesturilor cu ESP32 și GY-87** | ESP32 + GY-87 | Echipa înregistrează trei gesturi și exemple de mișcare obișnuită, apoi antrenează un model care rulează pe ESP32. Fiecare gest transmite o comandă distinctă prin MQTT. Un coleg care nu a participat la antrenare execută gesturile într-o ordine aleasă de el. Se verifică atât comenzile recunoscute, cât și declanșările accidentale dintre gesturi. |
+| 2 | Detectarea anomaliilor de vibrație cu TinyML | ESP32 + GY-87 | Echipa înregistrează vibrațiile unui dispozitiv în două regimuri de funcționare. Pe o înregistrare nouă, compară alertele unui model rulat pe ESP32 cu cele obținute printr-un prag simplu. |
+| 3 | Clasificarea obiectelor cu Teachable Machine și publicarea rezultatului prin MQTT | Cameră USB + Raspberry Pi sau PC | Echipa antrenează un clasificator pe imagini proprii pentru două categorii de obiecte și clasa „cadru gol”. Testează cu alte exemplare și în altă lumină. Un obiect ținut în cadru generează un singur eveniment MQTT. Dacă este scos și reintrodus, generează al doilea eveniment. [Teachable Machine](https://teachablemachine.withgoogle.com/) |
+| 4 | Recunoaștere facială locală cu Raspberry Pi | Raspberry Pi + cameră USB | Sistemul recunoaște voluntarii înscriși și afișează „necunoscut” pentru o persoană neînscrisă. Echipa testează cu imagini diferite de cele de referință și arată cum influențează iluminarea și pragul de potrivire rezultatul. Imaginile voluntarilor se păstrează local pe durata demonstrației. |
+| 5 | Asistent AI pentru interogarea datelor unei stații IoT | ESP32 + senzor de mediu + Raspberry Pi sau PC | Stația înregistrează măsurători, iar utilizatorul întreabă, de exemplu, „Când a depășit ultima dată umiditatea 70% și pentru cât timp?”. Aplicația determină intervalul din jurnal și formulează răspunsul printr-un serviciu AI. Echipa verifică rezultatul în datele originale și testează o perioadă pentru care lipsesc măsurători. |
+
+#### B. Sisteme cu senzori și comunicații IoT
+
+| Nr. | Tema de proiect | Echipament principal | Demonstrație finală |
+| --- | --- | --- | --- |
+| 6 | Monitorizarea temperaturii și umidității cu alerte la depășiri persistente | ESP32 + DHT11/DHT22 sau BME280 | Stația publică măsurătorile prin MQTT și înregistrează începutul, durata și sfârșitul unei abateri. Echipa provoacă o depășire scurtă și una persistentă pentru a verifica regula de alertare. MicroPython este o opțiune de implementare. |
+| 7 | Rețea de senzori pentru mai multe încăperi, cu gateway ESP-NOW–MQTT | Două noduri ESP32 cu senzori + un ESP32 gateway | Gateway-ul colectează măsurătorile și le publică prin MQTT. Echipa deconectează pe rând câte un nod. Interfața identifică sursa care a încetat să transmită și continuă afișarea datelor de la celălalt nod. |
+| 8 | Înregistrator de date cu recuperarea măsurătorilor după întreruperea Wi-Fi | ESP32 + un senzor | Echipa întrerupe rețeaua în timpul achiziției. Placa salvează local măsurătorile și le retransmite la reconectare. Numerele de secvență permit verificarea eventualelor goluri sau duplicate. |
+| 9 | Monitorizarea manipulării unui colet | ESP32 + GY-87 | Dispozitivul jurnalizează răsturnările, înclinările prelungite și șocurile. O altă echipă manipulează coletul, iar autorii reconstruiesc ordinea manevrelor din jurnal și o compară cu ceea ce s-a întâmplat efectiv. |
+
+#### C. Detectarea mișcării și a persoanelor. Aplicații cu camere video
+
+| Nr. | Tema de proiect | Echipament principal | Demonstrație finală |
+| --- | --- | --- | --- |
+| 10 | Detectarea mișcării cu PIR și confirmarea vizuală a prezenței unei persoane | Raspberry Pi + HC-SR501 + cameră USB | Sistemul păstrează o scurtă secvență video care începe înaintea declanșării și continuă după aceasta. Indică dacă în imagini apare o persoană. Echipa testează o trecere prin zona comună senzorului și camerei, apoi o trecere detectată de PIR în afara câmpului camerei. |
+| 11 | Numărarea trecerilor pe sens cu doi senzori PIR | ESP32 sau Raspberry Pi + doi senzori PIR | Sistemul deduce sensul din ordinea activărilor. Echipa stabilește poziția senzorilor și testează o traversare completă, o întoarcere la jumătatea traseului și două treceri apropiate. |
+| 12 | Numărarea persoanelor pe sens de deplasare cu o cameră video | Raspberry Pi + cameră USB | Sistemul urmărește persoanele între cadre și numără traversările unei linii virtuale. Echipa compară rezultatul cu numărătoarea manuală, inclusiv când o persoană se oprește lângă linie sau se întoarce înainte de a o traversa. |
+| 13 | Transmisie video cu estomparea automată a fețelor | Raspberry Pi + cameră USB | Fluxul procesat se vede în browserul unui al doilea dispozitiv. Echipa verifică estomparea cu două persoane în cadru și observă ce se întâmplă când una își întoarce capul și detecția devine intermitentă. |
+| 14 | Citirea automată a unui afișaj numeric prin OCR | Raspberry Pi + cameră USB + aparat cu afișaj | Sistemul citește periodic un afișaj real și salvează valoarea împreună cu ora. Echipa compară rezultatele cu citiri manuale și demonstrează cum marchează o imagine neclară sau o valoare imposibilă. |
+| 15 | Acționarea unei bariere de acces prin recunoașterea numerelor de înmatriculare | Raspberry Pi + cameră USB + ieșire de comandă pentru controlerul barierei | Sistemul citește numărul de înmatriculare, îl compară cu lista de acces și emite o singură comandă de deschidere pentru un vehicul autorizat. Echipa testează un număr autorizat, unul neautorizat și unul ilizibil. La postul de laborator, comanda poate fi verificată printr-un LED sau la ieșirea unui releu. |
+| 16 | Citirea asistată a indexului unui contor, cu redare vocală pe telefon pentru persoane cu deficiențe de vedere | Raspberry Pi + cameră USB orientată spre un contor + telefon | Utilizatorul pornește citirea de pe telefon printr-un buton etichetat pentru cititorul de ecran. Camera fotografiază afișajul, aplicația extrage indexul prin OCR, iar telefonul îl citește cu voce tare și permite repetarea lui. Echipa testează utilizarea fără consultarea vizuală a ecranului, inclusiv o captură neclară pentru care telefonul cere o nouă citire. |
 
 ### Realizarea proiectului
 
