@@ -101,9 +101,19 @@ Verificați în `~/lab7/webcampics` că imaginea are în nume data și ora captu
 
    Cele cinci asteriscuri programează pornirea scriptului la fiecare minut. Scriptul salvează fotografiile în `~/lab7/webcampics/`, iar mesajele și eventualele erori se adaugă în `~/lab7/capture.log`.
 4. **În nano**, apăsați **Ctrl+O** (litera O) pentru salvare, **Enter** pentru confirmarea numelui fișierului și **Ctrl+X** pentru ieșire.
-5. **Înapoi în terminal**, tastați `crontab -l` și apăsați **Enter**. În lista afișată trebuie să vedeți linia adăugată la pasul 3.
+5. **Înapoi în terminalul de pe Raspberry Pi**, tastați `crontab -l` (litera **l**, de la *list*) și apăsați **Enter**. Comanda afișează sarcinile programate pentru utilizatorul vostru. Dacă vedeți linia cu cele cinci asteriscuri și `capture.sh`, programarea este salvată.
 
-**Verificați fotografiile.** Lăsați camera fixă și deplasați obiectul între capturi. După cel puțin trei minute, deschideți folderul `lab7/webcampics` din directorul personal. Parcurgeți fotografiile în ordinea numelor și comparați poziția obiectului și orele capturilor. Dacă fotografiile lipsesc, rulați în terminal `systemctl is-active cron` pentru starea serviciului și `tail ~/lab7/capture.log` pentru ultimele mesaje.
+**Ce se întâmplă după salvare?** După ce ieșiți din editor, `cron` pornește automat scriptul la începutul fiecărui minut. De exemplu, dacă reveniți în terminal la 10:34:25, primele două porniri sunt programate la 10:35 și 10:36. Fotografia apare după terminarea capturii. Mesajele sunt scrise în `~/lab7/capture.log`, de aceea terminalul poate rămâne fără niciun mesaj nou.
+
+**Câte fotografii se fac?** Fiecare rulare reușită salvează o fotografie. Captura continuă o dată pe minut, inclusiv după închiderea terminalului, cât timp placa este pornită, serviciul `cron` este activ și programarea există. Pentru această probă, urmăriți **trei fotografii automate noi**. Dacă ați pornit cu o singură fotografie de la testul manual, după cele trei capturi veți avea patru fotografii în folder.
+
+**Verificați rezultatul.** Lăsați camera fixă și deplasați obiectul între capturi. După puțin peste un minut, rulați în terminalul de pe Raspberry Pi:
+
+```bash
+ls -lt ~/lab7/webcampics
+```
+
+Fotografia cea mai recentă apare prima. Verificați ora din numele ei și repetați comanda după următoarea captură. Deschideți cele trei fotografii noi din folderul `lab7/webcampics` și comparați poziția obiectului. Dacă programarea apare în `crontab -l`, dar fotografiile lipsesc, rulați `tail ~/lab7/capture.log` pentru ultimele mesaje ale scriptului și `systemctl is-active cron` pentru starea serviciului.
 
 **Opriți captura periodică înainte de streaming.** În terminalul de pe Raspberry Pi, tastați din nou `crontab -e` și apăsați **Enter**. În editor, așezați cursorul pe linia adăugată la pasul 3. În nano, **Ctrl+K** șterge linia curentă. Salvați cu **Ctrl+O**, confirmați cu **Enter** și ieșiți cu **Ctrl+X**. Înapoi în terminal, verificați cu `crontab -l` că programarea a fost eliminată. Dacă o captură este deja în curs, așteptați să se încheie.
 
