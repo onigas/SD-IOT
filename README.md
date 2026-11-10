@@ -2,12 +2,27 @@
 
 Materiale de laborator pentru ESP32, Raspberry Pi și aplicații Internet of Things (IoT).
 
-## Laboratoare disponibile
+## Cuprins
+
+- [Partea I — Sisteme cu ESP32](#esp32)
+- [Partea a II-a — Sisteme cu Raspberry Pi](#raspberry-pi)
+- [Partea a III-a — Proiect de sistem dedicat pentru IoT](#proiect)
+
+<a id="esp32"></a>
+
+## Partea I — Sisteme cu ESP32
+
+<a id="laboratoare-disponibile"></a>
+
+### Laboratoare și materiale
 
 | Laborator | Temă | Îndrumător | Cod sursă |
 | --- | --- | --- | --- |
+| **1** | Introducere în ESP32. Configurarea plăcii, GPIO și scanarea rețelelor Wi-Fi | — | — |
 | **2** | Comunicații cu ESP32: Wi-Fi, HTTP, Bluetooth, WhatsApp și e-mail | [Laboratorul 2](Laborator_02_Comunicatii_ESP32/README.md) | [Proiecte Arduino](Laborator_02_Comunicatii_ESP32/cod/) |
 | **3** | Senzori și interfețe web cu ESP32: DHT11, PIR, MPU6050/GY-87 și vizualizare 3D | [Îndrumător online](Laborator_03_Senzori_ESP32/documentatie/Laborator_03.md) · [PDF](Laborator_03_Senzori_ESP32/documentatie/Laborator_03.pdf) | [Cele 5 proiecte Arduino](Laborator_03_Senzori_ESP32/cod/) |
+| **4** | Interfețe web și rețele ESP32. Grafice, punct de acces și ESP-MESH | — | — |
+| **5** | MQTT pe ESP32. Publicarea datelor de la senzori printr-un broker public sau local | — | — |
 | **6** | ESP-NOW: comunicații directe între ESP32, comparație cu ESP-MESH și gateway Wi-Fi | [Introducere teoretică](Laborator_06_ESP_NOW/documentatie/Laborator_06.md) | [Prezentarea laboratorului](Laborator_06_ESP_NOW/README.md) |
 
 ### Laboratorul 3 — Senzori și interfețe web cu ESP32
@@ -27,6 +42,33 @@ Exercițiile sunt organizate în cinci proiecte independente:
 Laboratorul abordează protocolul ESP-NOW, diferențele față de ESP-MESH, topologiile de comunicație și transmiterea datelor de la senzorul GY-87. Aplicațiile includ comunicații Two-Way, One-to-Many, Many-to-One și un gateway ESP-NOW + Wi-Fi Web Server.
 
 **[Deschideți introducerea Laboratorului 6](Laborator_06_ESP_NOW/documentatie/Laborator_06.md)**.
+
+<a id="raspberry-pi"></a>
+
+## Partea a II-a — Sisteme cu Raspberry Pi
+
+### Lucrări din îndrumătorul Raspberry Pi
+
+| Laborator | Temă | Activități | Număr în îndrumătorul inițial |
+| --- | --- | --- | --- |
+| **L7** | Raspberry Pi 5 și camera | Configurare, captură foto și video, timelapse și streaming | 8 |
+| **L8** | Captură foto declanșată de un senzor PIR | Detectarea mișcării cu senzorul PIR și comanda camerei | 9 |
+| **L9** | Achiziția și înregistrarea datelor de la senzori | Măsurători cu DHT11/DHT22, BME280 și GY-87 | 11 |
+
+### Lucrări OpenCV
+
+| Laborator | Temă | Activități |
+| --- | --- | --- |
+| **L10** | Prelucrarea imaginilor cu OpenCV | Achiziție de la o cameră USB, detectarea muchiilor și identificarea obiectelor după culoare |
+| **L11** | Detecție în flux video cu OpenCV | Detectarea mișcării prin comparație cu un cadru de referință, detectarea fețelor și afișarea rezultatelor în browser |
+
+<a id="proiect"></a>
+
+## Partea a III-a — Proiect de sistem dedicat pentru IoT
+
+- Teme de proiect pentru ESP32, Raspberry Pi sau platforme similare.
+- Cerințe de realizare și documentare a sistemului.
+- Demonstrarea și prezentarea proiectului.
 
 ## Utilizare
 
