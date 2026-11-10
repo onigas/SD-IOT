@@ -24,7 +24,6 @@ Materiale de laborator pentru ESP32, Raspberry Pi și aplicații Internet of Thi
 | **4** | Interfețe web și rețele ESP32. Grafice, punct de acces și ESP-MESH | — | — |
 | **5** | MQTT pe ESP32. Publicarea datelor de la senzori printr-un broker public sau local | — | — |
 | **6** | ESP-NOW: comunicații directe între ESP32, comparație cu ESP-MESH și gateway Wi-Fi | [Introducere teoretică](Laborator_06_ESP_NOW/documentatie/Laborator_06.md) | [Prezentarea laboratorului](Laborator_06_ESP_NOW/README.md) |
-| **7** | Raspberry Pi: streaming video cu mjpg-streamer (instalare și depanare) | [Laboratorul 7](Laborator_07_RPi_Streaming/README.md) | [Comenzi și verificări](Laborator_07_RPi_Streaming/README.md) |
 
 ### Deschiderea proiectelor Arduino
 
