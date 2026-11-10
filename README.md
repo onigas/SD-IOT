@@ -52,7 +52,7 @@ Laboratorul abordează protocolul ESP-NOW, diferențele față de ESP-MESH, topo
 | Laborator | Temă | Activități | Număr în îndrumătorul inițial |
 | --- | --- | --- | --- |
 | **L7** | [Raspberry Pi 5 și camera USB](Laborator_07_Raspberry_Pi_Camera/README.md) | Identificarea camerei, captură foto, timelapse cu cron și streaming video | 8 |
-| **L8** | [PIR și camera USB](Laborator_07_Raspberry_Pi_Camera/PIR_si_camera_USB.md) | Continuarea L7: testarea HC-SR501, fotografie la detecție și afișarea detecțiilor în browser | 9 |
+| **L8** | [PIR și camera USB](Laborator_07_Raspberry_Pi_Camera/PIR_si_camera_USB.md) | Testarea HC-SR501, fotografie la detecție și afișarea detecțiilor în browser | 9 |
 | **L9** | Achiziția și înregistrarea datelor de la senzori | Măsurători cu DHT11/DHT22, BME280 și GY-87 | 11 |
 
 ### Lucrări OpenCV
