@@ -73,6 +73,8 @@ Păstrați parolele Wi-Fi, tokenurile și cheile API în configurația locală. 
 | 8 | Înregistrator de date cu recuperarea măsurătorilor după întreruperea Wi-Fi | ESP32 + un senzor | Echipa întrerupe rețeaua în timpul achiziției. Placa salvează local măsurătorile și le retransmite la reconectare. Numerele de secvență permit verificarea eventualelor goluri sau duplicate. | Titea Ruben; Salnicean Răzvan |
 | 9 | Monitorizarea manipulării unui colet | ESP32 + GY-87 | Dispozitivul jurnalizează răsturnările, înclinările prelungite și șocurile. O altă echipă manipulează coletul, iar autorii reconstruiesc ordinea manevrelor din jurnal și o compară cu ceea ce s-a întâmplat efectiv. | Hosu Răzvan; Nistor Dorin |
 
+| 17 | **Rețea corporală wireless de senzori inerțiali pentru recunoașterea mișcărilor (WBAN)** | Două noduri ESP32-C3 + IMU cu 6 axe, un ESP32-S3 central | **Proiect de an:** Două noduri purtate pe antebrațe transmit prin ESP-NOW datele inerțiale către ESP32-S3. Nodul central afișează datele într-o interfață web și recunoaște prin reguli cel puțin trei mișcări, de exemplu ridicarea brațului stâng, drept și a ambelor brațe, distingându-le de repaus. Echipa verifică recunoașterea într-o ordine de mișcări aleasă de un coleg și raportează erorile. **Extindere pentru diplomă:** Patru noduri pe brațe și picioare, sincronizare și fuziune multisenzor, colectarea unui set de date și clasificare în timp real cu TinyML pe ESP32-S3; opțional, miniaturizare pe PCB propriu. | — |
+
 #### C. Detectarea mișcării și a persoanelor. Aplicații cu camere video
 
 | Nr. | Tema de proiect | Echipament principal | Demonstrație finală | Studenți înscriși |
