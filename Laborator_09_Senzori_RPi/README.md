@@ -287,6 +287,35 @@ Folosind modelul de la secțiunea 2.3, reprezentați în funcție de timp:
 
 Explicați diferența dintre o schimbare a **orientării statice** și o **rotație în curs**.
 
+### 3.5. Task nou — BMP180: temperatura și presiunea în timp real
+
+**Obiectiv:** citiți independent circuitul BMP180 (`0x77`) de pe modulul GY-87, afișați **două grafice actualizate în timp real** (temperatură în °C și presiune atmosferică în hPa) și salvați automat măsurătorile în CSV, respectiv graficele într-o imagine PNG.
+
+Acest task poate fi executat **direct după secțiunea 3.2**; nu este obligatoriu să rulați mai întâi `gy87_logger.py`. Conexiunile sunt aceleași și nu este necesar niciun senzor suplimentar. Bibliotecile `board`, `bmp180` și `matplotlib` sunt instalate în **secțiunea 1**. Utilizați terminalul din desktopul Raspberry Pi, accesat prin **Raspberry Pi Connect → Screen sharing** sau VNC: graficul necesită un mediu grafic (nu doar Remote shell).
+
+**Program complet:** [`bmp180_live.py`](bmp180_live.py). Pentru a-l descărca direct în Raspberry Pi, executați:
+
+~~~bash
+mkdir -p ~/lab9
+cd ~/lab9
+source .venv/bin/activate
+wget -O bmp180_live.py https://raw.githubusercontent.com/onigas/SD-IOT/main/Laborator_09_Senzori_RPi/bmp180_live.py
+python bmp180_live.py
+~~~
+
+Dacă fereastra grafică nu poate fi deschisă și apare o eroare legată de `tkinter` sau de backend-ul grafic, instalați din terminalul Raspberry Pi `sudo apt install -y python3-tk`, apoi reluați programul **din terminalul desktopului**. Dacă nu aveți acces la GitHub direct din Raspberry Pi, deschideți fișierul Python din linkul de mai sus și copiați conținutul în `nano ~/lab9/bmp180_live.py`.
+
+**Funcționare:** programul citește temperatura și presiunea la intervale de **2 secunde**, timp de **3 minute** (`INTERVAL_S` și `DURATA_S` pot fi modificate la începutul fișierului). În timpul achiziției, graficul superior reprezintă temperatura, iar cel inferior presiunea, în funcție de timpul scurs. Programul poate fi oprit anticipat cu **Ctrl+C** sau închizând fereastra grafică.
+
+**Fișiere generate în `~/lab9/`:**
+
+- `bmp180_live.csv` — timestamp, timpul scurs, temperatura [°C], presiunea [hPa];
+- `bmp180_live.png` — cele două grafice, salvate la finalul măsurătorilor (dacă există eșantioane valide).
+
+**Sarcini de analiză:** (1) înregistrați cel puțin 60 de secunde; (2) determinați valorile minime, maxime și amplitudinea variației pentru temperatură și presiune; (3) explicați de ce presiunea poate rămâne aproape constantă într-un interval scurt; (4) discutați de ce temperatura măsurată de BMP180, montat pe o placă electronică, poate diferi de temperatura aerului. Nu încălziți excesiv modulul.
+
+**Notă:** biblioteca `circuitpython-bmp180` returnează `temperature` în °C și `pressure` în hPa. <https://circuitpython-bmp180.readthedocs.io/en/latest/api.html>. Biblioteca este marcată *deprecated* de autorii ei; această versiune folosește aceeași bibliotecă deja aleasă pentru Laboratorul 9. Funcționarea scriptului trebuie confirmată pe postul de laborator.
+
 ## 4. Experimentul 3 — Placă virtuală 3D controlată de GY-87
 
 Vom realiza o reprezentare 3D într-un browser, folosind **Flask + CSS 3D**, fără biblioteci grafice externe. Placa este un paralelipiped stilizat cu marcaje X/Y; ea se înclină la mișcarea senzorului real. Aceasta este o **vizualizare a înclinării** (roll și pitch), nu o soluție AHRS completă.
@@ -445,6 +474,7 @@ http://ADRESA_IP:5000/
 
 - fișierul `dht.csv` și graficul `dht.png`;
 - rezultatul scanării I²C, plus fișierul `gy87.csv` cu măsurători din repaus și din mișcare;
+- pentru taskul 3.5: `bmp180_live.csv`, `bmp180_live.png` și o scurtă analiză a variațiilor de temperatură și presiune;
 - demonstrarea plăcii 3D live într-un browser de pe alt dispozitiv;
 - răspuns scurt: ce măsoară DHT11/DHT22, ce oferă GY-87, ce înseamnă roll/pitch/yaw și de ce yaw nu poate fi determinat direct numai din accelerație.
 
