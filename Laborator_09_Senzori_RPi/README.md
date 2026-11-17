@@ -41,6 +41,14 @@ python -m pip install adafruit-blinka adafruit-circuitpython-dht \
   adafruit-circuitpython-mpu6050 circuitpython-bmp180 matplotlib
 ~~~
 
+**Verificați instalarea bibliotecilor GY-87** (cu mediul virtual activ):
+
+~~~bash
+python -c "import board, adafruit_mpu6050, bmp180; print('Biblioteci OK')"
+~~~
+
+Dacă importurile reușesc, apare mesajul `Biblioteci OK`. În caz contrar, verificați eroarea afișată și instalarea pachetelor.
+
 Mediul separat pentru L9 are acces și la pachetele de sistem, inclusiv Flask folosit în L8. Pachetele `python3-venv`, `python3-pip` și `i2c-tools` nu sunt cerute în L7/L8; dacă sunt deja instalate și actualizate, comanda `apt install` le păstrează.
 
 **În fiecare terminal nou** în care rulați programele L9, activați mediul:
@@ -215,7 +223,7 @@ Căutați în mod obișnuit **0x68** și **0x77**. Dacă una lipsește, verifica
 
 ### 3.3. Data logger GY-87
 
-Creați `/lab9/gy87_logger.py`:
+Creați `~/lab9/gy87_logger.py`:
 
 ~~~python
 import csv
