@@ -1,7 +1,5 @@
 # Laboratorul 9 — Achiziția, înregistrarea și vizualizarea datelor de la senzori
 
-[Înapoi la Partea a II-a — Sisteme cu Raspberry Pi](../README.md#raspberry-pi)
-
 **Platformă:** Raspberry Pi 5 cu Raspberry Pi OS; **durată orientativă:** 3–4 ore.  
 **Stadiu:** îndrumător inițial pentru testare pe posturile de laborator; codul nu este încă validat pe hardware-ul concret.
 
