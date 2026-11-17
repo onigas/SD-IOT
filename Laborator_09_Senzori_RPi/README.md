@@ -188,7 +188,7 @@ python plot_dht.py
 
 ### 3.2. Conexiuni
 
-![Conectarea magistralei I²C GY-87 la Raspberry Pi 5](imagini/conectare_gy87_rpi5.svg)
+![Schema GY-87 cu VCC_IN alimentat la 5 V, pinul 3.3V neconectat și I²C la 3,3 V](imagini/conectare_gy87_rpi5_vcc_in.svg)
 
 
 **Conexiuni pentru varianta GY-87 cu regulator de tensiune, intrare `VCC_IN` și pin separat `3.3V`:**
