@@ -24,9 +24,11 @@ Conexiunile sunt ilustrate separat în secțiunile 2.1 și 3.2. Raspberry Pi în
 
 Senzorii pot fi testați succesiv; nu trebuie rulați simultan pentru a îndeplini cerințele. Ambele proiecte au propriul director de lucru, în ~/lab9.
 
-## 1. Configurarea mediului
+## 1. Pregătirea pentru senzorii din L9
 
-În Raspberry Pi OS, deschideți un terminal și pregătiți mediul Python:
+Continuați pe postul folosit la laboratoarele 7 și 8. Accesul la Raspberry Pi și Flask sunt deja pregătite. Pentru această lucrare adăugați bibliotecile senzorilor, instrumentele I²C și biblioteca pentru grafice.
+
+**O singură dată pentru L9**, în terminalul Raspberry Pi:
 
 ~~~bash
 sudo apt update
@@ -34,24 +36,26 @@ sudo apt install -y python3-venv python3-pip i2c-tools
 mkdir -p ~/lab9
 cd ~/lab9
 python3 -m venv .venv --system-site-packages
-source ~/lab9/.venv/bin/activate
+source .venv/bin/activate
 python -m pip install adafruit-blinka adafruit-circuitpython-dht \
-  adafruit-circuitpython-mpu6050 circuitpython-bmp180 flask matplotlib
+  adafruit-circuitpython-mpu6050 circuitpython-bmp180 matplotlib
 ~~~
 
-La fiecare terminal nou reactivați mediul cu ~~~source ~/lab9/.venv/bin/activate~~~.
+Mediul separat pentru L9 are acces și la pachetele de sistem, inclusiv Flask folosit în L8. Pachetele `python3-venv`, `python3-pip` și `i2c-tools` nu sunt cerute în L7/L8; dacă sunt deja instalate și actualizate, comanda `apt install` le păstrează.
 
-Verificați pachetele:
+**În fiecare terminal nou** în care rulați programele L9, activați mediul:
 
 ~~~bash
-python -c "import board, adafruit_dht, adafruit_mpu6050, bmp180, flask; print('Importuri OK')"
+source ~/lab9/.venv/bin/activate
 ~~~
 
-Dacă interfața I²C nu este activă: `sudo raspi-config` → **Interface Options → I2C → Enable**, apoi reporniți placa. Verificați:
+**I²C este nou pentru această lucrare:** camera USB și senzorul PIR din L7/L8 nu folosesc această interfață. Verificați:
 
 ~~~bash
 ls /dev/i2c-1
 ~~~
+
+Dacă dispozitivul există, continuați cu experimentele. Dacă lipsește, executați `sudo raspi-config` → **Interface Options → I2C → Enable**, reporniți placa și verificați din nou. Activarea se face o singură dată pe placă.
 
 **Compatibilitate:** pe Raspberry Pi 5 și versiunile actuale Raspberry Pi OS, funcționarea DHT prin GPIO poate depinde de versiunea Blinka și de backend-ul GPIO. Dacă la test apar erori de backend sau sincronizare, notați versiunile cu `python -m pip freeze` și mesajul exact; nu presupuneți că un cod pentru modele Raspberry Pi mai vechi rulează identic.
 
