@@ -191,14 +191,19 @@ python plot_dht.py
 ![Conectarea magistralei I²C GY-87 la Raspberry Pi 5](imagini/conectare_gy87_rpi5.svg)
 
 
+**Conexiuni pentru varianta GY-87 cu regulator de tensiune, intrare `VCC_IN` și pin separat `3.3V`:**
+
 | GY-87 | Raspberry Pi 5 |
 | --- | --- |
+| **VCC_IN** (intrarea regulatorului de pe modul) | **5 V — pin fizic 2 sau 4** |
+| **3.3V** (ieșirea regulatorului de pe modul) | **NECONECTAT** — nu legați la pinul 3,3 V al Raspberry Pi |
 | GND | GND — pin fizic 6 |
-| SDA | GPIO2 / SDA1 — pin fizic 3 |
-| SCL | GPIO3 / SCL1 — pin fizic 5 |
-| 3V3/VCC | alimentare **conform reviziei reale a plăcii** |
+| SDA | GPIO2 / SDA1 — pin fizic 3, **numai după verificarea nivelului logic** |
+| SCL | GPIO3 / SCL1 — pin fizic 5, **numai după verificarea nivelului logic** |
 
-**Verificare hardware necesară:** unele module GY-87 au intrare **VCC_IN** cu regulator și pin separat **3.3V** (ieșire de regulator). Nu tratați arbitrar aceste două borne ca echivalente. Asigurați-vă că nivelurile I²C către Raspberry Pi nu depășesc 3,3 V; verificați alimentarea potrivită pentru revizia existentă la post.
+**Atenție — verificați fizic modulul înainte de conectare.** Tabelul și schema se referă numai la reviziile GY-87 la care `VCC_IN` este intrarea unui regulator de 3,3 V, iar pinul `3.3V` este conectat la ieșirea acestuia. Pinul `3.3V` **nu este echivalent** cu `VCC_IN` și **nu se conectează la sursa de 3,3 V a Raspberry Pi** în această configurație. Pentru un alt pinout sau o altă revizie, consultați schema modulului efectiv.
+
+**Verificare obligatorie a magistralei I²C înainte de conectarea SDA și SCL la Raspberry Pi:** alimentați GY-87 prin `VCC_IN` și `GND`, cu liniile SDA/SCL încă deconectate de la GPIO; verificați cu multimetrul nivelurile la repaus și destinația rezistențelor pull-up. Acestea **nu trebuie să depășească 3,3 V** pe GPIO-urile Raspberry Pi. Dacă liniile sunt trase la 5 V sau nu puteți confirma nivelul sigur, **nu le conectați direct**: verificați revizia și utilizați, dacă este necesar, un convertor de nivel bidirecțional pentru I²C.
 
 Cu modulul conectat, executați:
 
